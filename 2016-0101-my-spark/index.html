@@ -1,0 +1,613 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="note,R," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 我的R language备忘录 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              我的R language备忘录
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-01
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>只是稍微记录了一下我在R中常用到的一些简单语法</p>
+<a id="more"></a>
+<h2 id="Select-by-conditions"><a href="#Select-by-conditions" class="headerlink" title="Select by conditions"></a>Select by conditions</h2><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># <span class="keyword">select</span> * <span class="keyword">from</span> df <span class="keyword">where</span> gender==<span class="string">'male'</span> <span class="keyword">AND</span> age==<span class="number">20</span></div><div class="line">df[df[,<span class="string">'gender'</span>]==<span class="string">'male'</span> &amp; df[,<span class="string">'age'</span>]==<span class="number">20</span>,]</div></pre></td></tr></table></figure>
+<h2 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">names</span><span class="params">(d)</span></span>[names(d)==<span class="string">"beta"</span>] &lt;- <span class="string">"two"</span></div></pre></td></tr></table></figure>
+<h2 id="select-column-by-var"><a href="#select-column-by-var" class="headerlink" title="select column by var"></a>select column by var</h2><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df[,<span class="string">'age'</span>]</div></pre></td></tr></table></figure>
+<h2 id="select-rows-by-var-subset"><a href="#select-rows-by-var-subset" class="headerlink" title="select rows by var(subset)"></a>select rows by var(subset)</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subset(<span class="name">df</span>, `$`(df , <span class="string">"fid_6"</span>)==1)</div></pre></td></tr></table></figure>
+<h2 id="remove-col"><a href="#remove-col" class="headerlink" title="remove col"></a>remove col</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">X &lt;- iris[,-which(colnames(iris) == <span class="string">"Species"</span>)]</div></pre></td></tr></table></figure>
+<h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">str</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="title">class</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="title">mode</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="title">attributes</span><span class="params">()</span></span></div></pre></td></tr></table></figure>
+<h2 id="kmeans"><a href="#kmeans" class="headerlink" title="kmeans"></a>kmeans</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cl&lt;-kmeans(x,<span class="number">4</span>)</div><div class="line"><span class="function"><span class="title">par</span><span class="params">(mar=c(<span class="number">10</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">4</span>)</span></span>+<span class="number">0.1</span>)</div><div class="line">cl<span class="variable">$size</span></div><div class="line">cl<span class="variable">$withinss</span></div><div class="line">cl<span class="variable">$betweenss</span></div><div class="line"><span class="function"><span class="title">points</span><span class="params">(cl<span class="variable">$centers</span>, col = <span class="number">1</span>:<span class="number">2</span>, pch = <span class="number">8</span>, cex = <span class="number">0.5</span>)</span></span></div><div class="line"><span class="function"><span class="title">plot</span><span class="params">(x, col = cl<span class="variable">$cluster</span>)</span></span></div><div class="line"><span class="function"><span class="title">legend</span><span class="params">(<span class="string">"topright"</span>, inset=.<span class="number">05</span>, title=<span class="string">"Number of Cylinders"</span>, c(<span class="string">"4"</span>,<span class="string">"6"</span>,<span class="string">"8"</span>)</span></span>, fill=terrain.colors(<span class="number">3</span>), horiz=TRUE)</div></pre></td></tr></table></figure>
+<h2 id="Load-data"><a href="#Load-data" class="headerlink" title="Load data"></a>Load data</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mydata &lt;- <span class="keyword">read</span>.table(<span class="string">'/Users/marvin/Desktop/tmp/etl2_wow_1w.csv'</span>, header=<span class="keyword">TRUE</span>, sep=<span class="string">','</span>, row.names=<span class="string">'userid'</span>)</div></pre></td></tr></table></figure>
+<h2 id="Add-Col"><a href="#Add-Col" class="headerlink" title="Add Col"></a>Add Col</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">ne</span>&lt;-<span class="class"><span class="keyword">data</span>.frame(<span class="title">x</span>,<span class="title">cl</span>$<span class="title">cluster</span>)</span></div></pre></td></tr></table></figure>
+<h2 id="Remove-Col"><a href="#Remove-Col" class="headerlink" title="Remove Col"></a>Remove Col</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df2 &lt;- df[!names(df) %<span class="keyword">in</span>% c(<span class="string">"X2"</span>,<span class="string">"work_duration"</span>, <span class="string">"idle_duration"</span>, <span class="string">"night_duration"</span>)]</div></pre></td></tr></table></figure>
+<h2 id="Draw-multi-bar"><a href="#Draw-multi-bar" class="headerlink" title="Draw multi bar"></a>Draw multi bar</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">mms &lt;- aggregate(df_aggr, by=<span class="keyword">list</span>(df_aggr$cluster), FUN=<span class="string">"mean"</span>)</div><div class="line">colors &lt;- c(<span class="string">'darkolivegreen'</span>, <span class="string">'darkorchid'</span>, <span class="string">'deeppink'</span>, <span class="string">'gold'</span>, <span class="string">'dodgeblue'</span>, <span class="string">'cyan'</span>, <span class="string">'aliceblue'</span>)</div><div class="line">mms</div><div class="line">str(mms)</div><div class="line">help(barplot)</div><div class="line">barplot(mms$qq_age, </div><div class="line">        main=<span class="string">"hi"</span>,</div><div class="line">        names.arg=mms$Group<span class="number">.1</span>, </div><div class="line">        horiz = T,</div><div class="line">        cex.names=<span class="number">1</span>,</div><div class="line">        width=<span class="number">0.2</span>,</div><div class="line">        col=c(<span class="string">'#fffeee'</span>,<span class="string">'#33eeee'</span>,<span class="string">'#ffb90f'</span>,<span class="string">'#bb33ee'</span>,<span class="string">'#ff5050'</span>,<span class="string">'#66ee22'</span>,<span class="string">'#6699ee'</span>)</div><div class="line">        )</div><div class="line">        </div><div class="line">draw_multi_means&lt;-<span class="function"><span class="keyword">function</span><span class="params">(df, clusters, columns)</span></span></div><div class="line">&#123;</div><div class="line">  colors &lt;- c(<span class="string">'darkolivegreen'</span>, <span class="string">'darkorchid'</span>, <span class="string">'deeppink'</span>, <span class="string">'gold'</span>, <span class="string">'dodgeblue'</span>, <span class="string">'cyan'</span>, <span class="string">'aliceblue'</span>)</div><div class="line">  mms &lt;- aggregate(df, by=<span class="keyword">list</span>(df$cluster), FUN=<span class="string">"mean"</span>)</div><div class="line">  </div><div class="line">  <span class="keyword">for</span> (i_col in columns)</div><div class="line">  &#123;</div><div class="line">    colors &lt;- c(<span class="string">'darkolivegreen'</span>, <span class="string">'darkorchid'</span>, <span class="string">'deeppink'</span>, <span class="string">'gold'</span>, <span class="string">'dodgeblue'</span>, <span class="string">'cyan'</span>, <span class="string">'aliceblue'</span>)</div><div class="line">    </div><div class="line">    result &lt;- data.frame()</div><div class="line">    barplot(mms[,i_col], </div><div class="line">            main=i_col,</div><div class="line">            names.arg=mms$Group<span class="number">.1</span>, </div><div class="line">            horiz = T,</div><div class="line">            cex.names=<span class="number">1</span>,</div><div class="line">            width=<span class="number">0.2</span>,</div><div class="line">            col=c(<span class="string">'#fffeee'</span>,<span class="string">'#33eeee'</span>,<span class="string">'#ffb90f'</span>,<span class="string">'#bb33ee'</span>,<span class="string">'#ff5050'</span>,<span class="string">'#66ee22'</span>,<span class="string">'#6699ee'</span>)</div><div class="line">    )</div><div class="line">    </div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">#mean(df$qq_age)</span></div><div class="line">  <span class="comment">#mean(df[,i]) # IMPORTANT!!</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h2><figure class="highlight glsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sample</span> data frame</div><div class="line">df[<span class="keyword">sample</span>(nrow(df), <span class="number">1000</span>), ]</div></pre></td></tr></table></figure>
+<h2 id="Subset"><a href="#Subset" class="headerlink" title="Subset"></a>Subset</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df[df$<span class="built_in">id</span> %<span class="keyword">in</span>% c(<span class="number">1</span>,<span class="number">2</span>),]</div></pre></td></tr></table></figure>
+<h2 id="COOL-BY-VAR"><a href="#COOL-BY-VAR" class="headerlink" title="COOL BY VAR!!!"></a>COOL BY VAR!!!</h2><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d[d[,<span class="string">'x'</span>] == <span class="string">'c'</span>,]</div></pre></td></tr></table></figure>
+<h2 id="Remove-Null-omit"><a href="#Remove-Null-omit" class="headerlink" title="Remove Null (omit)"></a>Remove Null (omit)</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">na</span><span class="selector-class">.omit</span>(<span class="selector-tag">df</span>)</div></pre></td></tr></table></figure>
+<h2 id="draw"><a href="#draw" class="headerlink" title="draw"></a>draw</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">ggplot</span><span class="params">(data=my_data, aes(my_data<span class="variable">$friends_count</span>)</span></span>) + </div><div class="line">  geom_histogram(col=<span class="string">"red"</span>, </div><div class="line">                 aes(fill=.<span class="selector-class">.count</span>..)) + scale_fill_gradient(<span class="string">"Count"</span>, low = <span class="string">"green"</span>, high = <span class="string">"red"</span>)</div><div class="line">--- draw</div><div class="line"><span class="function"><span class="title">plot</span><span class="params">(x, col = cl<span class="variable">$cluster</span>)</span></span></div><div class="line"><span class="function"><span class="title">points</span><span class="params">(cl<span class="variable">$centers</span>, col = <span class="number">1</span>:<span class="number">2</span>, pch = <span class="number">8</span>, cex = <span class="number">2</span>)</span></span></div><div class="line"></div><div class="line">---</div><div class="line">after kmeans:</div><div class="line"></div><div class="line">cl<span class="variable">$withinss</span></div><div class="line">cl<span class="variable">$betweenss</span></div></pre></td></tr></table></figure>
+<h2 id="multi-distribution"><a href="#multi-distribution" class="headerlink" title="multi distribution"></a>multi distribution</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">df<span class="variable">$cat</span> &lt;- factor(df<span class="variable">$flag</span>, levels=c(<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>), labels=c(<span class="string">"df"</span>,<span class="string">"pos"</span>,<span class="string">"neg"</span>))</div><div class="line"><span class="function"><span class="title">attributes</span><span class="params">(df)</span></span></div><div class="line"><span class="function"><span class="title">densityplot</span><span class="params">(~qq_age, data=df, group=cat, auto.key=T)</span></span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/note/"> #note </a>
+          
+            <a href="/tags/R/"> #R </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-03-10-python-pandas/">Python的熊猫们(pandas)</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-11-15-trick_ios_select_all/">iOS中的全选技巧</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Select-by-conditions"><span class="nav-number">1.</span> <span class="nav-text">Select by conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rename"><span class="nav-number">2.</span> <span class="nav-text">rename</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-column-by-var"><span class="nav-number">3.</span> <span class="nav-text">select column by var</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select-rows-by-var-subset"><span class="nav-number">4.</span> <span class="nav-text">select rows by var(subset)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-col"><span class="nav-number">5.</span> <span class="nav-text">remove col</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic"><span class="nav-number">6.</span> <span class="nav-text">basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kmeans"><span class="nav-number">7.</span> <span class="nav-text">kmeans</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Load-data"><span class="nav-number">8.</span> <span class="nav-text">Load data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Col"><span class="nav-number">9.</span> <span class="nav-text">Add Col</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-Col"><span class="nav-number">10.</span> <span class="nav-text">Remove Col</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Draw-multi-bar"><span class="nav-number">11.</span> <span class="nav-text">Draw multi bar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample"><span class="nav-number">12.</span> <span class="nav-text">Sample</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Subset"><span class="nav-number">13.</span> <span class="nav-text">Subset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COOL-BY-VAR"><span class="nav-number">14.</span> <span class="nav-text">COOL BY VAR!!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-Null-omit"><span class="nav-number">15.</span> <span class="nav-text">Remove Null (omit)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#draw"><span class="nav-number">16.</span> <span class="nav-text">draw</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-distribution"><span class="nav-number">17.</span> <span class="nav-text">multi distribution</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

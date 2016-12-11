@@ -1,0 +1,910 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="machine-learning,data-mining" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <div id="posts" class="posts-expand">
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
+                Transform of Hive Streaming
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>我这大半年来大多数时候是在用Hadoop或者Hive对数据进行处理，而在处理hive数据时，有的功能用Hive很难实现或者不能够实现，这个时候就可以引入脚本来帮忙处理，以下整理出我在工作中总结出的一些东西。</p>
+<p>Streaming可以让我在Hive上直接运行python脚本，优点是开发快捷，缺点是效率偏低。</p>
+<p>要使用Streaming进行开发，需要对输出进行转换——使用TRANSFORM()，将默认的输出转换成字符串，该字符串具有如下特点：</p>
+<p>(1) 列之间的分隔符为\t;</p>
+<p>(2) 行之间的分隔符为\n;</p>
+<p>(3) 表中为空的数据将显示成为\N;</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
+<li>标准MapReduce</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-01-14-hadoop-mr-template/">
+                我的Hadoop MapReduce模板
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-01-14
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>行走江湖，有一套自己顺手的模板是很重要的，可以在很多时候提高开发效率，减少重复劳动力。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-01-14-hadoop-mr-template/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2013-04-12-tsu-thinker/">
+                [转]清华生的多年奋斗领悟
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-04-12
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>原文链接不详<br>转载自：<a href="http://hi.baidu.com/1qqqqcom/item/7715ecd8bc40950820e2501b">http://hi.baidu.com/1qqqqcom/item/7715ecd8bc40950820e2501b</a></p>
+<h2 id="我的摘录"><a href="#我的摘录" class="headerlink" title="我的摘录"></a>我的摘录</h2><blockquote>
+<ol>
+<li><p>成功的人都有的共同特点——勤奋且坚韧不拔，目的性强善于学习，从不抱怨规则的不公平而是善于从不公平的规则中找到有利于自己的漏洞。</p>
+</li>
+<li><p>再烂的东西都有它的优点。 你今天学一点，明天学一点才会有所提高。否则除了骂社会，你什么都不会，一辈子白活。看别人要看优点，看自己要看到缺点。</p>
+</li>
+<li><p>凡事不要蛮干，要利用其他人的能力和资源。</p>
+</li>
+<li><p>平日，看到别人的成就，我一定会感慨：“为什么他的机会这么好?为什么我就赶不上，如果我生于他那个时代，我将怎样怎样。但我没有，所以我什么也做不了。”长此以往，我就看见一个个机会从我身边溜走，然后再一次次地发出这样的感慨。那么，我会永远在蹉跎叹息中度过，碌碌无为。</p>
+<p>终于我发现，这种感慨不过是出于嫉妒和懦弱的感情，为自己的懒惰找一个冠冕堂皇的借口。如果我当年不是每天回去打魔兽，不是每天上班先要打开电脑泡会儿论坛，而是把这些时间在自我提高，那我就能抓住那次房价大涨的扩张期，做到更高的职位，拿到更好地薪水。于是，机会溜走了。</p>
+<p>人生路上总有好多的岔口，当时选哪一条路往往很偶然。既然选择了一条的时候，另一条就关上了大门，那我们何必停下来，去感慨如果当初选了另一条会怎样怎样，自增烦恼。还不如勇往直前往前闯。<strong>临渊慕鱼，不如退而结网</strong>。</p>
+</li>
+<li><p>老祖宗讲过这么两句话，我觉得很深：一句叫静坐常思己过，闲谈莫论人非。还有一句叫露巧不如藏拙。</p>
+</li>
+<li><p>人就是这样，不是说成绩有多么重要，但是<strong>优秀是一种习惯</strong>，懒惰是一种惯性。人和人的差别又是就是因为每天积累差了一点点，终于有天你发现，原来我和他差了这么多。</p>
+<p> 如果离成功只有一步之遥，那谁都会咬牙坚持下来;如果忽然发现距离很远，那谁都会放弃。而<strong>关键的一咬牙，上了一个层次，有人就会春风得意，越活越成功</strong>;有人没上去，永远在苦逼中挣扎求生存。然后想，原来在当时，我们俩的距离才那么近。</p>
+</li>
+<li><p>大学的意义在于他给你打开了一片天，让你看的更远，让你知道原来在这个山头之外还有一个更高的山头。并不意味着你已经达到了那个山头，但你有了往上爬的方向，同时他给你聚集了一帮志同道合，以后可以互相扶持的社会单元。所以完全不必短视和急功近利，人生那么长，炫耀是做给别人看的，本事是自己，好像跑马拉松，一时谁跑得快慢不重要，关键是谁跑到了最后。</p>
+</li>
+</ol>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013-04-12-tsu-thinker/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2013-03-24-reservoid-sampling/">
+                蓄水池抽样(reservoid sampling)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-03-24
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>缘起一道算法题目：有一个很大很大的输入流，大到没有存储器可以将其存储下来，而且只输入一次，如何从这个输入流中随机取得m个记录？（n未知）</p>
+<p>花了点时间，终于搞清楚了这个问题的正确解法以及证明方法，而我觉得<strong>目前为止网络上的许多证明都是错的！</strong> 所以我才想重新写写。</p>
+<p>让我们先从头开始——</p>
+<h2 id="1-开胃小菜，从m-1开始说起"><a href="#1-开胃小菜，从m-1开始说起" class="headerlink" title="1.开胃小菜，从m = 1开始说起"></a>1.开胃小菜，从m = 1开始说起</h2><p>有一个数据流持续输入，在不知道流具体大小的情况下，怎么样才可以保证从流中公平地（即保证每一个元素被选中的概率是等可能的）获取一个样本？</p>
+<h3 id="1-1-算法大意"><a href="#1-1-算法大意" class="headerlink" title="1.1 算法大意"></a>1.1 算法大意</h3><p>为方便起见，假设下标是从1开始的</p>
+<p>假设流数据为： stream[1], stream[2], stream[3], …, stream[n] （n在程序运行地过程中并不知道）</p>
+<p>单凭直观感觉，这题并不难解，</p>
+<p>首先在第1个元素到来的时候我们先暂定目标元素result = stream[1]；</p>
+<p>当第2个元素到来的时候，我们以1/2的概率来决定，result 是否要剔除原先的stream[1]换成stream[2]；</p>
+<p>当第3个元素到来的时候，我们以1/3的概率来决定result是否要被替换成stream[3]；</p>
+<p>同理，当第i个元素到来的时候，我们以1/i的概率来决定result是否要被替换成stream[i]；</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013-03-24-reservoid-sampling/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2013-02-24-josephus-game/">
+                有关约瑟夫环问题(Josephus Game)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-02-24
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>n个小朋友手拉手围成一个圈，给定一个数字m。</p>
+<p>这时以第一个小朋友为起点开始报数，数到m的小朋友出列；</p>
+<p>m的下家为新的起点，开始重新开始报数；</p>
+<p>如此反复，一直到剩下最后一个小朋友。</p>
+<p>请问如何可以求得这最后的小朋友是谁？</p>
+<p>最容易想到的就是写个程序直接模拟游戏的全过程</p>
+<p>而<strong>动态规划</strong>的解法要更加的优雅简单</p>
+<p>定义方法：getSurvive(n, m) 返回(n,m)的最终生还者编号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSurvive</span><span class="params">(n, m)</span>:</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    <span class="keyword">else</span>:</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (getSurvive(n - <span class="number">1</span>, m) + m) % n</div></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2013-01-26-top-k-sort/">
+                [排序算法]关于Top-k排序(优先队列Priority Queue)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-01-26
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>在实际应用中，常有这样一种情况，对于一大堆杂乱无章的数据(大小为n)，我们需要的往往只是其中最小或者最大的前k位，而之后的数据对我们没有任何意义，普通的排序算法在这个时候就显得有点不合时宜了，特别是当k &lt;&lt; n时，简直是杀鸡用牛刀，还浪费了大量磨刀的时间。</p>
+<h2 id="1-Appetiser-first-先来点开胃菜"><a href="#1-Appetiser-first-先来点开胃菜" class="headerlink" title="1. Appetiser, first! 先来点开胃菜"></a>1. Appetiser, first! 先来点开胃菜</h2><p>实例：假设手头上有100万个数字，而现在只需要知道其中数值最大的100个数，那么应该怎么办？</p>
+<h3 id="Part-I-方法选择"><a href="#Part-I-方法选择" class="headerlink" title="Part I.方法选择"></a>Part I.方法选择</h3><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>使用常规排序算法对所有条目进行排序，接着再选取Top-100。</p>
+<p>这种方法之前已经说过，在这种情景下效率偏低，不太合适。</p>
+<p>在使用快排的情况下，时间复杂度为O(nlogn)) = O(100wlog100w)</p>
+<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>使用堆排序(Heap Sort)（或者更具体一点说应该是使用k-堆排序）[专业术语叫做：<strong>优先队列(Priority Queue)</strong>]</p>
+<p>这便是这篇文章所要具体介绍的方法。（不过方案二给出的方法并不是最好的解决方案）</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013-01-26-top-k-sort/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-11-13-knn/">
+                k-NN(k Nearest Neighbor)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-11-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="直观理解"><a href="#直观理解" class="headerlink" title="直观理解"></a>直观理解</h2><p>　　k-NN是一种基于“物以类聚人以群分”思路的分类方法。</p>
+<p>　　</p>
+<p>　　以下图为例，小明为刚加入这个班级不久的新同学，在挑选兴趣小组时稍微犯了点难，因为他好像对什么都不太感兴趣，但是经过一周和班上同学的接触，小明和同学们的亲疏程度已经有了自己的判断，在图中以距离的形式表现了出来，距离越近的关系越好。</p>
+<p>　　那么，在如何给小明划分群体的这个问题上，我们就可以使用k-NN来进行判断。我们取k = 6,即认为小明的群体划分是以和他关系最好的6个人来判断的，明显，图中和小明最亲近的6个人中，5个是活泼调皮类型的，1个是文静类型的，因此我们可以大致判断，小明有比较大的可能也是属于活泼调皮类型的。</p>
+<p><img src="\img\2012-11-13-knn-01.png" alt="小明"></p>
+<p>但是如果考虑k &gt; 10的情况，例如k = 11，那么我们可以发现，11个人中，5个活泼好动，另外6个文静，则按照k-NN的思想，我们认为小明是属于文静类型的人。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-11-13-knn/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-11-06-Perceptron/">
+                Perceptron(感知机)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-11-06
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>所谓的“感知机”这个名词显得有点名不副实，因为我实在没觉得它的机制和感知不感知有什么联系，容易误导不明真相的群众。</p>
+<p>其实不过就是二类分类的线性分类模型，一种将实例划分成为正负两类的判别模型。得到实例的输入之后，再输出值(只能是+1和-1这两个值)。</p>
+<p>感知机学习的终极目标就是通过训练样本最终找到一个能将正负类型隔开的一个超平面。</p>
+<h3 id="直观的几何理解："><a href="#直观的几何理解：" class="headerlink" title="直观的几何理解："></a>直观的几何理解：</h3><p><img src="\img\2012-11-06-Perceptron-01.jpg" alt="分类"></p>
+<h3 id="理论定义"><a href="#理论定义" class="headerlink" title="理论定义"></a>理论定义</h3><p>假设输入空间（特征空间）是 $X \subset R^n$ ，输出空间是$Y \in {+1, -1}$。 输入$x \in X$ 表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in Y$表示实例的类别。 由输入空间到输出空间当然如下函数成为感知机。</p>
+<p>$$f(x) = sign(w \cdot x + b)$$</p>
+<p>其中，</p>
+<p>(1) w,b为感知机模型参数，sign()为符号函数</p>
+<p>(2) x - 空间中的一个点，它是一个n维向量：$ (x^{(1)}, x^{(2)}, …, x^{(n)}) $</p>
+<p>(3) y - 对应于x的分类，取值{-1,1}，一般认为当x在超平面S上时取+1（与S法向量同方向）；反之则取-1</p>
+<p>(4) w - 权值(weight)或权值向量(weight vector)</p>
+<p>(5) b - 偏置(bias)</p>
+<p>(6) $w \cdot x$ 表示 向量w 和 x的内积.</p>
+<p>(7) sign() - 符号函数，即</p>
+<p>$$sign(x) = \begin{equation}\begin{cases} 1, x \geq 0 \<br>0, x &lt; 0 \end {cases} \end{equation}$$</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-11-06-Perceptron/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+
+  
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

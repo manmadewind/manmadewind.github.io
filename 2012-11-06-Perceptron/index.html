@@ -1,0 +1,681 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="机器学习,分类,感知机," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> Perceptron(感知机) // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Perceptron(感知机)
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-11-06
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>所谓的“感知机”这个名词显得有点名不副实，因为我实在没觉得它的机制和感知不感知有什么联系，容易误导不明真相的群众。</p>
+<p>其实不过就是二类分类的线性分类模型，一种将实例划分成为正负两类的判别模型。得到实例的输入之后，再输出值(只能是+1和-1这两个值)。</p>
+<p>感知机学习的终极目标就是通过训练样本最终找到一个能将正负类型隔开的一个超平面。</p>
+<h3 id="直观的几何理解："><a href="#直观的几何理解：" class="headerlink" title="直观的几何理解："></a>直观的几何理解：</h3><p><img src="\img\2012-11-06-Perceptron-01.jpg" alt="分类"></p>
+<h3 id="理论定义"><a href="#理论定义" class="headerlink" title="理论定义"></a>理论定义</h3><p>假设输入空间（特征空间）是 $X \subset R^n$ ，输出空间是$Y \in {+1, -1}$。 输入$x \in X$ 表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in Y$表示实例的类别。 由输入空间到输出空间当然如下函数成为感知机。</p>
+<p>$$f(x) = sign(w \cdot x + b)$$</p>
+<p>其中，</p>
+<p>(1) w,b为感知机模型参数，sign()为符号函数</p>
+<p>(2) x - 空间中的一个点，它是一个n维向量：$ (x^{(1)}, x^{(2)}, …, x^{(n)}) $</p>
+<p>(3) y - 对应于x的分类，取值{-1,1}，一般认为当x在超平面S上时取+1（与S法向量同方向）；反之则取-1</p>
+<p>(4) w - 权值(weight)或权值向量(weight vector)</p>
+<p>(5) b - 偏置(bias)</p>
+<p>(6) $w \cdot x$ 表示 向量w 和 x的内积.</p>
+<p>(7) sign() - 符号函数，即</p>
+<p>$$sign(x) = \begin{equation}\begin{cases} 1, x \geq 0 \<br>0, x &lt; 0 \end {cases} \end{equation}$$</p>
+<a id="more"></a>
+<p>！注意：这里的x,w其实都是向量而非单变量！每一个x都代表空间中的一个点,以三维空间为例，$x_0 = ( x^{(1)}, x^{(2)}, x^{(3)})$，此处的$ x^{(1)}, x^{(1)}, x^{(1)}$对应于高中数学中见到的x,y,z。此处的y并非是x,y,z中的y，它只是用来表示点x所属的分类，可以记为任何字母，比如c。</p>
+<p>详细的几何解释：</p>
+<p><img src="\img\2012-11-06-Perceptron-02.jpg" alt="分类"></p>
+<h3 id="感知机的学习策略："><a href="#感知机的学习策略：" class="headerlink" title="感知机的学习策略："></a>感知机的学习策略：</h3><p>这里有一个前提假设——假设训练数据集是线性可分的。</p>
+<p>感知机学习的目标是求一个能将训练集正负实例点完全正确分开的分离超平面。即确定感知机模型参数w, b。</p>
+<p>为了实现此目标我们需要确定一个学习策略，即定义一个经验损失函数，并使其损失极小化。</p>
+<p>此时最容易想到的损失函数就是错误分类点的总数(设所有误分类的点集合为M),即：</p>
+<p>$$L(w,b) = |M|$$</p>
+<p>但是显然，这个损失函数与参数w,b并无直接相关，我们不太容易通过正常的方法来建立起它和w,b之间的关系并找到最终所需要的超平面，所以将这个损失函数暂时放到一边。</p>
+<p>关于损失函数的另一个选择是所有误分类点到超平面S的总距离。首先，根据所学的数学知识，显然空间中的一点$x_0$到超平面S的距离表示为：</p>
+<p>$$\frac{1}{||w||}|w \cdot x_0 + b|$$</p>
+<p>此处的||w|| 是w的L_2范式，即 $||w|| = \sqrt{w_1^2 + w_2^2 + … \quad} $</p>
+<p>不难发现，对于被错误分类的数据 $(x_0,y_0)$ 来说， $y_0(w \cdot x_0 + b) \leq 0$ 恒成立。因为对于被错误分类分类的点，</p>
+<p>(1) 当 $(w \cdot x_0 + b) &gt; 0$ 时，$y = -1$，此时 $ y_0(w \cdot x_0 + b) = -1(w \cdot x_0 + b) &lt; 0 $；</p>
+<p>(2) 当 $(w \cdot x_0 + b) &lt; 0$ 时，同理可知， $y_0(w \cdot x_0 + b) &lt; 0$ 也成立；</p>
+<p>(3) 当 $(w \cdot x_- + b) = 0$ 时，点位于超平面上，也属于不能被正确分类。(其实=0时还有另一种情况)</p>
+<p>因此对于错误分类的点来说，$y_0(w \cdot x_0 + b) \leq 0$恒成立。</p>
+<p>设误分类点的集合为M，则所有无分类点到S的总距离为：</p>
+<p>$$\frac{1}{||w||}\sum_{x_i \in M}y_i(w \cdot x + b)$$</p>
+<p>得到新的损失函数：</p>
+<p>$$L(w,b) = -\frac{1}{||w||} \sum<em>{x</em>{i} \in M} y_{i}(w \cdot x_i + b)$$</p>
+<p>显然，此L(w, b) &gt;= 0 恒成立（距离）， 当其为0时就算找到了可以适合训练数据的超平面。 明显，损失函数L(w,b)是w,b的线性函数，而且是w,b的连续可导函数。</p>
+<p>因此我们就决定使用它了！但是这里，我们不考虑$ \frac{1}{||w||} $（我猜可能是因为考虑到这样求梯度比较方便），稍微修改之后选定最终的损失函数为：</p>
+<p>损失函数：</p>
+<p>$$ L(w,b) = - \sum<em>{x</em>{i} \in M} y_{i}(w \cdot x_i + b) $$</p>
+<p>感知机学习算法</p>
+<p>采用随机梯度下降法（stochastic gradient desecent）。</p>
+<p>首先，任意选取一个超平面$ w_0, b_0 $，然后使用梯度下降法不断地极小化目标函数，极小化的过程是每次随机选取M中的一个点来使其梯度下降。</p>
+<p>假设误分类点集合M是固定的，那么损失函数L(w,b)的梯度：</p>
+<p>$$\nabla<em>w L(w,b) = - \sum</em>{x_i \in M}\quad y_ix_i \<br>\nabla<em>b L(w,b) = -\sum</em>{x_i \in M}\quad y_i$$</p>
+<p>每次随机从M中选取一个分类点（x_i, y_i），对w, b进行更新：</p>
+<p>$$w = w + ry_ix_i \<br>b = b + ry_i$$</p>
+<p>其中r(0 &lt; r)</p>
+<p>通过这种迭代可以期待损失函数不断减小，直到最终为0.（前提是数据集确实线性可分）</p>
+<p>一个简单的训练案例如下：</p>
+<p>正分类点：$ {x_0 = (3,3)^T, (y_0 = +1)} $;</p>
+<p>负分类点：$ {x_1 = (1,1)^T, (y_1 = -1)} $;</p>
+<p>学习率： r = 1;</p>
+<p>初始值随机挑选：</p>
+<p>$ w = (2,2)^T $;</p>
+<p>$ b = -2 $;</p>
+<p>带入判断公式：$ y_0(w \cdot x_0 + b) $，发现$ x_1 $属于误分类点(因为带入判断公式后求出的值</p>
+<p>$$w = w + rx_1y_1 = (2,2)^T + 1\times(-1)\times(1,1) = (1,1)^T \<br>b = b + ry_1 = -2 + 1 \times (-1) = -3$$</p>
+<p>至此得到最终的超平面S：</p>
+<p>$$x^{(1)} + x^{(2)} -3 = 0$$</p>
+<p><img src="\img\2012-11-06-Perceptron-03.jpg" alt="分类超平面"></p>
+<h3 id="简而言之："><a href="#简而言之：" class="headerlink" title="简而言之："></a>简而言之：</h3><p>感知机学习算法的原始形式如下：</p>
+<ul>
+<li>感知机模型：</li>
+</ul>
+<p>$$f(x) = sign(w \cdot x + b)$$</p>
+<ul>
+<li>训练数据集：</li>
+</ul>
+<p>$$T = {(x_1, y_1),(x_2, y_2),\quad …\quad, (x_n, y_n)}$$</p>
+<p>其中$x_i \in R^n,\quad y_i \in {-1, +1}$; 学习率r(0 &lt; r</p>
+<ul>
+<li>输入：</li>
+</ul>
+<p>w, b;</p>
+<ul>
+<li>步骤：</li>
+</ul>
+<p>(1) 随机选取初始值$w_0, b_0$</p>
+<p>(2) 在训练集中选取数据$ (x_i, y_i) $</p>
+<p>(3) 如果$ y_i(wx_i + b) \leq 0 $ (误分类点),则：</p>
+<p>$$w = w + ry_ix_i \<br>b = b + ry_i$$</p>
+<p>(4) 转(2)，直至训练集中没有误分类点</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/"> #机器学习 </a>
+          
+            <a href="/tags/分类/"> #分类 </a>
+          
+            <a href="/tags/感知机/"> #感知机 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012-11-13-knn/">k-NN(k Nearest Neighbor)</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012-10-26-slowdown/">[读书笔记]自慢</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text">综述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直观的几何理解："><span class="nav-number">1.1.</span> <span class="nav-text">直观的几何理解：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理论定义"><span class="nav-number">1.2.</span> <span class="nav-text">理论定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机的学习策略："><span class="nav-number">1.3.</span> <span class="nav-text">感知机的学习策略：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简而言之："><span class="nav-number">1.4.</span> <span class="nav-text">简而言之：</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

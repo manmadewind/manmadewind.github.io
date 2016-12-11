@@ -1,0 +1,993 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="machine-learning,data-mining" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <div id="posts" class="posts-expand">
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-06-28-logistic-regression/">
+                谈谈Logistics Regression
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-28
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-从模型开始"><a href="#1-从模型开始" class="headerlink" title="1. 从模型开始"></a>1. 从模型开始</h2><p>Logistic Regression(常被翻译做“逻辑回归”) 一种分类模型，由于算法的简单和高效，在实际中应用非常广泛，尤其是它具有出色地将众多变量糅杂在一起并最终输出一个可以当做概率的值(大熔炉即视感)，因此颇为常用。</p>
+<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>$f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}}$</p>
+<p>该函数的神奇之处在于，可以将原本线性无拘无束的t值困在[0,1]范围内，并变换出一条柔美的S型曲线(Sigmoid Curve)。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="Sigmoid Curve"></p>
+<p>其实该函数还有另外一个名字——<code>Logistic Function</code>.</p>
+<h3 id="1-2-Logistic-Regression-Model"><a href="#1-2-Logistic-Regression-Model" class="headerlink" title="1.2 Logistic Regression Model"></a>1.2 Logistic Regression Model</h3><p>借助Logistic Function, 这里定义Logistic回归模型。</p>
+<p>$$P(Y=1|X) = \frac{exp(wx+b)}{1+exp(wx+b)} \<br>P(Y=0|X) = \frac{1}{1+exp(wx+b)}$$</p>
+<p>其中， $x \in R^n$是输入， $Y \in ${0,1}是输出，$w,b$为参数(w-权值, b-偏置)</p>
+<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数$(wx+b)$转换成概率P(Y=1|X)</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-06-28-logistic-regression/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-06-02-how-to-kill-cockroach/">
+                [日常生活]如何有效杀灭蟑螂
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-02
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>在香港租的一个房子中蟑螂成灾，每到夜幕降临它们便结伴而出，而且完全没有明显怕人的迹象，这实在让我觉得很恐慌。后来在知乎上查到了有效的杀蟑螂技巧——使用拜耳制造的蟑螂药！效果奇好，一杀杀光光，真是居家必备的良心产品！在使用的过程中我总结出了一些经验和注意事项，前几日写给同事，今天干脆也就放上来了。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-06-02-how-to-kill-cockroach/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-05-21-scrapy-for-cctv/">
+                Python爬虫抓取新闻联播内容
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-21
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>近日澎湃新闻刊登了一则新闻，内容是有招商证券分析团队通过分析新闻联播的关键字判断股市涨跌，在整个5月中准确率高到爆棚，于是我就先写了一个爬虫打算有空时用到，现在先把代码送给你们吧——一个用Python Scrapy写的一个新闻联播文字版的爬虫：）</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-05-21-scrapy-for-cctv/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-05-13-adaboost-predict-stock/">
+                使用AdaBoost对股票的涨跌进行预测
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>近期股市大热，一些朋友们估计已经蠢蠢欲动想要做些什么了吧！我这里先抛砖引玉，丢出一个使用sklearn对个股次日涨跌进行预测的简单方法。</p>
+<h2 id="AdaBoost作为分类模型"><a href="#AdaBoost作为分类模型" class="headerlink" title="AdaBoost作为分类模型"></a>AdaBoost作为分类模型</h2><p>AdaBoost是我个人很喜欢的分类器，在参数合适的情况下它的预测效果往往能带带来不错的效果。</p>
+<p>而Adaboost的训练方法其实是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。</p>
+<p>该算法其实是一个简单的弱分类算法提升过程，这个过程通过不断的训练，可以提高对数据的分类能力。</p>
+<p>大致过程叙述如下：</p>
+<ol>
+<li>其算法本身是通过改变数据分布来实现的，它根据每次训练集之中每个样本的分类是否正确，以及上次的总体分类的准确率，来确定每个样本的权值。</li>
+</ol>
+<ol>
+<li>将修改过权值的新数据集送给下层分类器进行训练，最后将每次训练得到的分类器最后融合起来，作为最后的决策分类器。</li>
+</ol>
+<p>具体过程可参看<a href="https://zh.wikipedia.org/wiki/AdaBoost">维基百科</a>此处不再类属。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-05-13-adaboost-predict-stock/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-04-28-hadoop-cmd/">
+                Hadoop中的常用命令
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-04-28
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>总结了一些我平时常用的Hadoop命令</p>
+<table>
+<thead>
+<tr>
+<th>主参数</th>
+<th>次参数</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs</td>
+<td>-get</td>
+<td>复制文件到本地路径下</td>
+<td>hadoop fs -get /user/hadoop/file localfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-put</td>
+<td>像目标目录推送文件</td>
+<td>hadoop fs -put localfile /user/hadoop/hadoopfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-cp</td>
+<td>复制，参数-f,-p</td>
+<td>hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mv</td>
+<td>移动，秒级完成</td>
+<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-count</td>
+<td>得到文件/目录等数目追加参数-q, -h有不同的意义</td>
+<td>hadoop fs -count -q hdfs://nn1.example.com/file1</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-du</td>
+<td>得到指定文件的大小</td>
+<td>hadoop fs -du /test/hadoop</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-ls</td>
+<td>显示文件</td>
+<td>hadoop fs -ls /user/hadoop/file1</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-lsr</td>
+<td>ls -R</td>
+<td>hadoop fs ls -R</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-rm</td>
+<td>删除文件</td>
+<td>hadoop fs -rm hdfs://nn.example.com/file /user/hadoop/emptydir</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-rmr</td>
+<td>删除文件夹（linux: rm -r）</td>
+<td>hadoop fs -rmr /usr/db/filedir/</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-tail</td>
+<td>输出文件的最后1千字节</td>
+<td>hadoop fs -tail pathname</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-test</td>
+<td>检查文件</td>
+<td>hadoop fs -test -e filename</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-touchz</td>
+<td>创建空文件</td>
+<td>hadoop fs -touchz pathname</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-appendToFile</td>
+<td>将一个或者多个本地文件追加到目的文件</td>
+<td>hadoop fs -appendToFile localfile /user/hadoop/hadoopfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mkdir</td>
+<td>创建目录，-p创建多层目录</td>
+<td>hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mv</td>
+<td>移动文件</td>
+<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>job</td>
+<td>-set-priority</td>
+<td>设置作业优先级</td>
+<td>hadoop job -set-priority jobid-0000-0000 VERY_HIGH</td>
+</tr>
+<tr>
+<td>job</td>
+<td>-kill</td>
+<td>杀掉作业</td>
+<td>hadoop job -kill jobid-0000-0000</td>
+</tr>
+</tbody>
+</table>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-04-10-svm-abs/">
+                SVM总结
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-04-10
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>话说当年知识掌握得还比较轻飘，在某厂面试时被要求徒手推导SVM也是一种难得的体验。</p>
+<p>转眼几年过去了，这里懒得再推SVM，就只放个综述作为备忘录。</p>
+<p>SVM也是一种基本分类器，与之前提到的感知机(Perceptron)颇为相似，不过需要注意，感知机找到的分类超平面可以有无限多个，只要是能对训练集数据进行正确分类即可，而SVM有着更为苛刻的要求，所求的分类超平面需要离最近的样本数据点距离最大（这些离最终分类平面最近的点被称为支持向量），这就意味着最终找到的分类超平面不仅能够划分训练数据，还需面对未知的数据具有较为良好的分类能力。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-04-10-svm-abs/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-03-25-hive-cmd/">
+                Hive的trick和坑
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-03-25
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="1-Hive直接插入数据"><a href="#1-Hive直接插入数据" class="headerlink" title="1.  Hive直接插入数据"></a>1.  Hive直接插入数据</h1><p>我们知道Hive在很多时候很好用，但是有时在做一些测试的时候，需要表里有一些数据，这个时候如果再导来到去或者再写源文件生成数据却是非常的麻烦，经我反复揣摩终于发现了一种直接往Hive表中插入数据的方法。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">INSERT INTO TABLE target_table</div><div class="line"></div><div class="line">SELECT STACK(</div><div class="line"></div><div class="line">    2,                 # 插入记录的总数</div><div class="line"></div><div class="line">    'John', 80,        # 记录1</div><div class="line"></div><div class="line">    'Bill', 61         # 记录2</div><div class="line"></div><div class="line">    ) </div><div class="line"></div><div class="line">FROM dual              # 任意一张已经存在的表（表中的记录条数&gt;=1即可）</div><div class="line"></div><div class="line">LIMIT 2;               # 插入记录的总数</div></pre></td></tr></table></figure>
+<h1 id="2-join有天坑"><a href="#2-join有天坑" class="headerlink" title="2. join有天坑"></a>2. join有天坑</h1><h2 id="Full-outer-join"><a href="#Full-outer-join" class="headerlink" title="Full outer join"></a>Full outer join</h2><p>Full outer join 在on中过滤分区有问题，解决方法是将分区过滤条件放到左表和右表子查询里面<br>比如：</p>
+<pre><code># 错误写法
+Select a.x,b.x from a full|left|right outer join b on (a.key=b.key and a.ds=d1 and b.ds=d1)
+
+
+# 正确写法
+Select t1.x ,t2.x from (select * from a where ds=d1) t1
+full outer join
+ (select * from  b where ds=d1) t2 on t1.key=t2.key
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-03-25-hive-cmd/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
+                Hive相关知识
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
+<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
+<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
+<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+
+  
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

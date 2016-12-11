@@ -1,0 +1,606 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="dict,大数据,haActionop," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 我的Hadoop MapReduce模板 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              我的Hadoop MapReduce模板
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-01-14
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>行走江湖，有一套自己顺手的模板是很重要的，可以在很多时候提高开发效率，减少重复劳动力。</p>
+<a id="more"></a>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.<span class="built_in">text</span>.ParseException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.<span class="built_in">text</span>.SimpleDateFormat;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.<span class="built_in">FileSystem</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.IntWritable;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.NullWritable;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Reducer;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.util.GenericOptionsParser;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"></div><div class="line"> * @author Marvin</div><div class="line"></div><div class="line"> * # 调用方法</div><div class="line"></div><div class="line"> * hadoop jar</div><div class="line"></div><div class="line"> * ## 必填参数 </div><div class="line"></div><div class="line"> * (1) Jar_Filename.jar </div><div class="line"></div><div class="line"> * (2) Class_Name(include main() function)</div><div class="line"></div><div class="line"> * ## 自带参数 可选</div><div class="line"></div><div class="line"> * (3) -Djobgroup=test -Dmapred.job.priority=VERY_HIGH</div><div class="line"></div><div class="line"> * ## 用户参数 </div><div class="line"></div><div class="line"> * (4) 来源文件(夹) [!支持通配符] </div><div class="line"></div><div class="line"> * (5) 目标文件夹</div><div class="line"></div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Template_Hadoop</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">	<span class="comment">// Map START</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> Map</div><div class="line"></div><div class="line">    		extends Mapper <span class="comment">// Output Type</span></div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">    	<span class="comment">/**</span></div><div class="line"></div><div class="line">    	 * 在任务开始时调用一次</div><div class="line"></div><div class="line">    	 */</div><div class="line"></div><div class="line">    	@Override</div><div class="line"></div><div class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">setup</span>(Context context) throws IOException, InterruptedException </div><div class="line"></div><div class="line">    	&#123;</div><div class="line"></div><div class="line">    		<span class="built_in">try</span> </div><div class="line"></div><div class="line">    		&#123;</div><div class="line"></div><div class="line">    			Configuration conf = context.getConfiguration();</div><div class="line"></div><div class="line">    			<span class="keyword">String</span> user_conf = conf.<span class="built_in">get</span>(<span class="string">"user_conf"</span>, <span class="string">""</span>); <span class="comment">// get conf value from main()</span></div><div class="line"></div><div class="line">    		&#125; </div><div class="line"></div><div class="line">    		<span class="built_in">catch</span> (Exception e) </div><div class="line"></div><div class="line">    		&#123; System.err.<span class="built_in">println</span>(<span class="string">"Error in setup, "</span> + e.getMessage()); &#125;</div><div class="line"></div><div class="line">    	&#125; <span class="comment">// setup()</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">map</span>(LongWritable key, Text value,</div><div class="line"></div><div class="line">                        Context context)</div><div class="line"></div><div class="line">                        throws IOException, InterruptedException</div><div class="line"></div><div class="line">    	&#123;</div><div class="line"></div><div class="line">            context.<span class="built_in">write</span>(<span class="keyword">new</span> Text(<span class="string">"Mapper's output Key"</span>),</div><div class="line"></div><div class="line">                          <span class="keyword">new</span> LongWritable(<span class="number">0</span>));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        &#125; <span class="comment">// map()</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    	<span class="comment">/**</span></div><div class="line"></div><div class="line">    	 * 任务运行结束调用函数</div><div class="line"></div><div class="line">    	 */</div><div class="line"></div><div class="line">        @Override</div><div class="line"></div><div class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> cleanup(Context context) </div><div class="line"></div><div class="line">    				throws IOException, InterruptedException </div><div class="line"></div><div class="line">    	&#123; &#125;</div><div class="line"></div><div class="line">    &#125; <span class="comment">// class Map</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// Reduce START</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> Reduce</div><div class="line"></div><div class="line">            extends Reducer  <span class="comment">// Reducer's Output</span></div><div class="line"></div><div class="line">    &#123;    	</div><div class="line"></div><div class="line">    	@Override</div><div class="line"></div><div class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">setup</span>(Context context) throws IOException, InterruptedException </div><div class="line"></div><div class="line">    	&#123; &#125; <span class="comment">// setup()</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">void</span> reduce(Text key,						           <span class="comment">// key</span></div><div class="line"></div><div class="line">                           Iterable values_raw_iterable, <span class="comment">// value</span></div><div class="line"></div><div class="line">                           Context context)</div><div class="line"></div><div class="line">        				   throws IOException, InterruptedException</div><div class="line"></div><div class="line">        &#123;</div><div class="line"></div><div class="line">        	Long sum = <span class="number">0</span>l;</div><div class="line"></div><div class="line">            <span class="built_in">for</span>(LongWritable long_w: values_raw_iterable)</div><div class="line"></div><div class="line">            &#123;</div><div class="line"></div><div class="line">            	Long value = long_w.<span class="built_in">get</span>();</div><div class="line"></div><div class="line">            	sum += value;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// Ouptut</span></div><div class="line"></div><div class="line">            context.<span class="built_in">write</span>(<span class="keyword">new</span> IntWritable(<span class="number">0</span>), <span class="keyword">new</span> Text(<span class="string">"Reducer's Output"</span>));            </div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    	<span class="comment">/**</span></div><div class="line"></div><div class="line">    	 * 任务运行结束调用函数</div><div class="line"></div><div class="line">    	 */</div><div class="line"></div><div class="line">        @Override</div><div class="line"></div><div class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> cleanup(Context context) </div><div class="line"></div><div class="line">    				throws IOException, InterruptedException </div><div class="line"></div><div class="line">    	&#123; &#125; <span class="comment">// cleanup()</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125; <span class="comment">// class Reduce</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// main START</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) throws Exception</div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();        </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">// 取得-D*** 之后的 用户自定义参数</span></div><div class="line"></div><div class="line">		<span class="keyword">String</span>[] otherArgs = <span class="keyword">new</span> GenericOptionsParser(conf, args).getRemainingArgs();</div><div class="line"></div><div class="line">		<span class="keyword">String</span> inputDir    = otherArgs[<span class="number">0</span>];</div><div class="line"></div><div class="line">		<span class="keyword">String</span> outputDir   = otherArgs[<span class="number">1</span>];</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// 设置configure配置变量</span></div><div class="line"></div><div class="line">		conf.set(<span class="string">"user_conf"</span>, <span class="string">"Hello_World!"</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// Set Job.</span></div><div class="line"></div><div class="line">		Job job = <span class="keyword">new</span> Job(conf);</div><div class="line"></div><div class="line">		job.setJarByClass(Template_Hadoop.<span class="keyword">class</span>);</div><div class="line"></div><div class="line">		job.setMapperClass(Map.<span class="keyword">class</span>);		</div><div class="line"></div><div class="line">		job.setReducerClass(Reduce.<span class="keyword">class</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// Map output</span></div><div class="line"></div><div class="line">		job.setMapOutputKeyClass(Text.<span class="keyword">class</span>);</div><div class="line"></div><div class="line">		job.setMapOutputValueClass(LongWritable.<span class="keyword">class</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// Reduce Output</span></div><div class="line"></div><div class="line">		job.setOutputKeyClass(Text.<span class="keyword">class</span>);</div><div class="line"></div><div class="line">		job.setOutputValueClass(NullWritable.<span class="keyword">class</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// Input/Output Path Setting</span></div><div class="line"></div><div class="line">		FileInputFormat.setInputPaths(job,  <span class="keyword">new</span> Path(inputDir)); <span class="comment">// inputDir 支持通配符</span></div><div class="line"></div><div class="line">		FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(outputDir)); </div><div class="line"></div><div class="line">		<span class="comment">//main_job.setOutputFormatClass(MidMultipleTextOutputFormat.class);</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// 输入输出确认</span></div><div class="line"></div><div class="line">		<span class="built_in">FileSystem</span> fs = <span class="built_in">FileSystem</span>.<span class="built_in">get</span>(conf);		</div><div class="line"></div><div class="line">		<span class="comment">// 判断输入是否存在，不存在则退出</span></div><div class="line"></div><div class="line">		<span class="comment">// [Warnning!] 在路径使用通配符的情况下，这中检测方法不适用</span></div><div class="line"></div><div class="line">		<span class="comment">/*</span></div><div class="line"></div><div class="line">		if (!fs.exists(new Path(inputDir))) </div><div class="line"></div><div class="line">		&#123;</div><div class="line"></div><div class="line">			System.err.println("Input dir doesn't exist.");</div><div class="line"></div><div class="line">			return;</div><div class="line"></div><div class="line">		&#125; </div><div class="line"></div><div class="line">		*/</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// 判断输出目录是否存在，存在则删除</span></div><div class="line"></div><div class="line">		<span class="built_in">if</span> (fs.<span class="built_in">exists</span>(<span class="keyword">new</span> Path(outputDir))) </div><div class="line"></div><div class="line">		&#123; fs.<span class="keyword">delete</span>(<span class="keyword">new</span> Path(outputDir), true); &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">// MapReduce Start</span></div><div class="line"></div><div class="line">		System.exit(job.waitForCompletion(true) ? <span class="number">0</span> : <span class="number">1</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行时，命令如下</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">hadoop jar <span class="string">\</span></div><div class="line"></div><div class="line">     Template_hadoop.jar <span class="string">\</span>              <span class="comment"># MR jar包</span></div><div class="line"></div><div class="line">     Template_hadoop <span class="string">\</span>			           <span class="comment"># Main Class</span></div><div class="line"></div><div class="line">     -Dmapred.job.priority=VERY_HIGH <span class="string">\</span>  <span class="comment"># 优先级</span></div><div class="line"></div><div class="line">     <span class="regexp">/usr/input/</span>*.txt <span class="string">\</span>                 <span class="comment"># 自定义参数1-输入文件夹</span></div><div class="line"></div><div class="line">     <span class="regexp">/usr/output/</span>                       <span class="comment"># 自定义参数2-输出文件夹</span></div></pre></td></tr></table></figure>
+<p>BTW,</p>
+<p>版本信息：</p>
+<p>Hadoop 1.2.1</p>
+<p>Java 1.6</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dict/"> #dict </a>
+          
+            <a href="/tags/大数据/"> #大数据 </a>
+          
+            <a href="/tags/haActionop/"> #haActionop </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-02-15-transform-of-hive-streaming/">Transform of Hive Streaming</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013-04-12-tsu-thinker/">[转]清华生的多年奋斗领悟</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

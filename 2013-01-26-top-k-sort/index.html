@@ -1,0 +1,654 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="工程算法,排序,top-k," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> [排序算法]关于Top-k排序(优先队列Priority Queue) // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [排序算法]关于Top-k排序(优先队列Priority Queue)
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-01-26
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>在实际应用中，常有这样一种情况，对于一大堆杂乱无章的数据(大小为n)，我们需要的往往只是其中最小或者最大的前k位，而之后的数据对我们没有任何意义，普通的排序算法在这个时候就显得有点不合时宜了，特别是当k &lt;&lt; n时，简直是杀鸡用牛刀，还浪费了大量磨刀的时间。</p>
+<h2 id="1-Appetiser-first-先来点开胃菜"><a href="#1-Appetiser-first-先来点开胃菜" class="headerlink" title="1. Appetiser, first! 先来点开胃菜"></a>1. Appetiser, first! 先来点开胃菜</h2><p>实例：假设手头上有100万个数字，而现在只需要知道其中数值最大的100个数，那么应该怎么办？</p>
+<h3 id="Part-I-方法选择"><a href="#Part-I-方法选择" class="headerlink" title="Part I.方法选择"></a>Part I.方法选择</h3><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>使用常规排序算法对所有条目进行排序，接着再选取Top-100。</p>
+<p>这种方法之前已经说过，在这种情景下效率偏低，不太合适。</p>
+<p>在使用快排的情况下，时间复杂度为O(nlogn)) = O(100wlog100w)</p>
+<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>使用堆排序(Heap Sort)（或者更具体一点说应该是使用k-堆排序）[专业术语叫做：<strong>优先队列(Priority Queue)</strong>]</p>
+<p>这便是这篇文章所要具体介绍的方法。（不过方案二给出的方法并不是最好的解决方案）</p>
+<a id="more"></a>
+<p>所谓k-堆排序就是创造并维护一个大小仅仅为K的堆</p>
+<p>在此处便是维护一个大小为100（而不是100W）的大根堆，寻找最大的数嘛，正常人的第一反应肯定都是使用大根堆。</p>
+<p>首先根据前100个元素建立起这个堆的雏形，之后对于每一个元素都进行一次资格审查，如果当前元素比100堆中的某个元素要大，则将它置换堆中；否则直接弃用（弱肉强食，适者生存）。</p>
+<p>这一趟扫描下来，最后留在堆中的100个元素就是Top100了。</p>
+<p>大致步骤如下（具体的细节比如swim()方法可以暂时不用管，后文会有专门的介绍，这里先看懂流程就好了）：</p>
+<h5 id="Step-1-创造并维护k-堆"><a href="#Step-1-创造并维护k-堆" class="headerlink" title="Step.1:创造并维护k-堆"></a>Step.1:创造并维护k-堆</h5><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">foreach (Element element <span class="keyword">in</span> SourceArray) <span class="comment">// 依次读取原始的数据元素</span></div><div class="line"></div><div class="line">&#123;    </div><div class="line"></div><div class="line">    <span class="keyword">if</span> (heap<span class="number">_100</span>.Count &lt;= <span class="number">100</span>) <span class="comment">// 创建大根堆</span></div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">         heap<span class="number">_100</span>.AppendAndSwim(element); <span class="comment">// 在堆的最尾追加元素，并使之上浮到合适的位置</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">else</span> <span class="comment">// 如果堆的大小 &gt; 100，则开始对堆进行维护操作</span></div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        Element heap<span class="number">_m</span><span class="keyword">in</span> = heap<span class="number">_100</span>.GetMin(); <span class="comment">// 找到当前大根堆中最小的元素</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (element &gt; heap<span class="number">_m</span><span class="keyword">in</span>) <span class="comment">// 新元素比堆中最小的元素还要大，因此将其置换入堆</span></div><div class="line"></div><div class="line">        &#123;</div><div class="line"></div><div class="line">            heap<span class="number">_100</span>.delete(heap<span class="number">_m</span><span class="keyword">in</span>);       <span class="comment">// 用新的元素替换原先最小的元素</span></div><div class="line"></div><div class="line">            heap<span class="number">_100</span>.AppendAndSwim(element); <span class="comment">// 让新元素上浮到合适的位置</span></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>寻找堆内最小元素的时间复杂度为O(logk) ，每次执行上浮的时间复杂度为O(logk)，因此，这样一次扫描下来建堆并维护堆的时间复杂度为O(nlogk) = O(100wlog100)</p>
+<p>不过到这里还只是建堆并维护堆的过程，而最终需要输出这100个元素的时候还是需要做一些额外的操作的。现在暂时将该操作命名为sink()，这每一次操作都将返回堆的根节点，接着重新调整堆的序列。</p>
+<p>构建最终结果集的大致步骤如下：</p>
+<h5 id="Step-2-构建结果集"><a href="#Step-2-构建结果集" class="headerlink" title="Step.2:构建结果集"></a>Step.2:构建结果集</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> (heap_100.Count &gt; <span class="number">0</span>)</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="built_in">Element</span> e = heap_100.Sink(); <span class="comment">// 返回当前堆的根节点，并将它从堆中删除，再重新对堆进行一次整理</span></div><div class="line"></div><div class="line">    resultList.Add(e);   <span class="comment">// 将结果添加入结果集合中</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> resultList; <span class="comment">// 返回最终结果集</span></div></pre></td></tr></table></figure>
+<p>每次Sink()的时间复杂度为O(logk)，因此该步骤的时间复杂度为O(klogk) = O(100log100)</p>
+<p>至此，整个获取Top-K的过程便结束了，总共需要的时间复杂度为O(nlogk) = O(100wlog100)</p>
+<h5 id="一点点小技巧：哨兵"><a href="#一点点小技巧：哨兵" class="headerlink" title="一点点小技巧：哨兵"></a>一点点小技巧：哨兵</h5><p>在方案二的基础上再做一些些小小改动，让这个算法可以跑得更快</p>
+<p>在之前的维护k-堆算法中，每一次都需要先调用FindMin()查找目前堆内元素的最小值，我们可以构建一个哨兵，使它等于当前堆中的最小值，这样每次就可以不用耗费logk的查找堆内最小值的操作了。</p>
+<h4 id="方案三-终极方案"><a href="#方案三-终极方案" class="headerlink" title="方案三(终极方案!)"></a>方案三(终极方案!)</h4><p>在方案三的基础上，使用小根堆（使用小根堆寻找最大的k个值）</p>
+<p>之前在没搞清楚这个问题的时候，上网查找相关的资料，看到很多帖子都很没头没脑的说，找k个最大值用小根堆。当时让我很费解，不太明白是怎么回事。</p>
+<p>现在我来说明一下，其实使用小根堆的原因有两个</p>
+<ul>
+<li><p>(1)维护k-堆的插入新结点和删除多余结点的操作非常简便；（最最重要的原因）</p>
+</li>
+<li><p>(2)可以用小根堆的根节点(root)直接作为哨兵元素使用。</p>
+</li>
+</ul>
+<p>使用了这套终极方案之后，全过程的时间复杂度为O(nlogk)，虽然和方案二的时间复杂度相同，但是实际运行的效率要比它快得多，写起来也方便许多。</p>
+<p>构建堆并进行维护的大致步骤如下：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">foreach</span> (Element element <span class="keyword">in</span> SourceArray) <span class="comment">// 依次读取原始的数据元素</span></div><div class="line"></div><div class="line">&#123;    </div><div class="line"></div><div class="line">    <span class="keyword">if</span> (heap.<span class="keyword">Count</span> &lt;= k) <span class="comment">// 创建小根堆！</span></div><div class="line"></div><div class="line">    &#123;         </div><div class="line"></div><div class="line">        heap.AppendAndSwim(element); <span class="comment">// 在堆的最尾追加元素，并使之上浮到合适的位置[时间复杂度：O(logk)]     </span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">else</span> <span class="comment">// 如果堆的大小&gt;k，则开始对堆进行维护操作</span></div><div class="line"></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (element &lt;= heap.Root) <span class="comment">// 哨兵站岗，小于小根堆的根结点就没有必要再做操作了             </span></div><div class="line"></div><div class="line">            <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (element &gt; heap.Root)</div><div class="line"></div><div class="line">        &#123;</div><div class="line"></div><div class="line">            heap.Sink(element); <span class="comment">// 用新元素置换出根结点(根节点就是最小的元素)，接着调整小根堆，使新元素下沉到合适的位置[时间复杂度：O(logk)]</span></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="实例：使用小根堆查找最大的k个数"><a href="#实例：使用小根堆查找最大的k个数" class="headerlink" title="实例：使用小根堆查找最大的k个数"></a>实例：使用小根堆查找最大的k个数</h5><p><img src="\img\2013-01-26-top-k-sort-01.png" alt="示意图"></p>
+<h2 id="Part-II-堆以及堆排序的细节"><a href="#Part-II-堆以及堆排序的细节" class="headerlink" title="Part II. 堆以及堆排序的细节"></a>Part II. 堆以及堆排序的细节</h2><h3 id="一、Heap-堆"><a href="#一、Heap-堆" class="headerlink" title="一、Heap 堆"></a>一、Heap 堆</h3><p>这里的堆特指二叉堆(Binary Heap)，二叉堆具有如下二个特质（以大根堆为例）：</p>
+<ol>
+<li><p>父节点 &gt;= 子节点</p>
+</li>
+<li><p>堆的树状结构是完全二叉树</p>
+</li>
+</ol>
+<p>！注意： 堆结构中并没有对左右节点的大小做要求！ 并没有像查找二叉树一样规定说左节点就一定要比右节点小。</p>
+<h3 id="二、关于堆排序的基本操作"><a href="#二、关于堆排序的基本操作" class="headerlink" title="二、关于堆排序的基本操作"></a>二、关于堆排序的基本操作</h3><p><img src="\img\2013-01-26-top-k-sort-02.png" alt="示意图"></p>
+<p><img src="\img\2013-01-26-top-k-sort-03.png" alt="示意图"></p>
+<h3 id="三、实例：使用小根堆查找最大的k个数"><a href="#三、实例：使用小根堆查找最大的k个数" class="headerlink" title="三、实例：使用小根堆查找最大的k个数"></a>三、实例：使用小根堆查找最大的k个数</h3><p>（上文中已经发过）</p>
+<p><img src="\img\2013-01-26-top-k-sort-01.png" alt="示意图"></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>实际情况中，碰到top-k问题时，堆排序并不是通解，还得具体情况具体分析。</p>
+<ul>
+<li>(1)当k极小的时候，假设k&lt;=C，这个时候之直接顺序扫描一次加上一个简单的列表存储，即可找到; </li>
+</ul>
+<ul>
+<li>(2)当C&lt;k&lt;n/2时，堆排序就是一个很棒的选择； </li>
+</ul>
+<ul>
+<li>(3)当k&gt;n/2时，别犹豫了，直接上快排吧；</li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工程算法/"> #工程算法 </a>
+          
+            <a href="/tags/排序/"> #排序 </a>
+          
+            <a href="/tags/top-k/"> #top-k </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013-02-24-josephus-game/">有关约瑟夫环问题(Josephus Game)</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012-11-13-knn/">k-NN(k Nearest Neighbor)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Appetiser-first-先来点开胃菜"><span class="nav-number">1.</span> <span class="nav-text">1. Appetiser, first! 先来点开胃菜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-I-方法选择"><span class="nav-number">1.1.</span> <span class="nav-text">Part I.方法选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方案一"><span class="nav-number">1.1.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案二"><span class="nav-number">1.1.2.</span> <span class="nav-text">方案二</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Step-1-创造并维护k-堆"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Step.1:创造并维护k-堆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Step-2-构建结果集"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Step.2:构建结果集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一点点小技巧：哨兵"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">一点点小技巧：哨兵</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案三-终极方案"><span class="nav-number">1.1.3.</span> <span class="nav-text">方案三(终极方案!)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例：使用小根堆查找最大的k个数"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">实例：使用小根堆查找最大的k个数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-II-堆以及堆排序的细节"><span class="nav-number">2.</span> <span class="nav-text">Part II. 堆以及堆排序的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Heap-堆"><span class="nav-number">2.1.</span> <span class="nav-text">一、Heap 堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、关于堆排序的基本操作"><span class="nav-number">2.2.</span> <span class="nav-text">二、关于堆排序的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实例：使用小根堆查找最大的k个数"><span class="nav-number">2.3.</span> <span class="nav-text">三、实例：使用小根堆查找最大的k个数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">3.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

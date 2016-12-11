@@ -1,0 +1,887 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="machine-learning,data-mining" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <div id="posts" class="posts-expand">
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-25-base_virtual-abstract/">
+                [基础知识]Virtual & Abstract
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-25
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Virtual</p>
+<p>虚函数是多态的前提和保证</p>
+<p>被标注为virtual的函数可以被继承类重写(override)，<strong>并且可以在运行时动态调用相应的方法</strong>（多态）。</p>
+<p>没有标注为virtual的非虚方法，在继承类中虽然不能通过override重写方法，但是也<strong>可以</strong>声明一个<strong>同名方法</strong>的，不过不具备多态的性质！</p>
+<pre><code>public class SuperClass
+{
+    public void Display()//not virtual
+    {
+        Console.WriteLine(&quot;I&apos;m super&quot;);
+    }
+
+    public virtual void Vdisplay()
+    {
+        Console.WriteLine(&quot;I&apos;m superVVV!!!&quot;);
+    }
+}
+
+public class LowerClass : SuperClass
+{
+    public void Display()//new public void Display();和父类中的方法同名，却不具备多态的性质
+    {
+        Console.WriteLine(&quot;i&apos;m lower&quot;);
+    }
+    public override void Vdisplay()//重写了父类中的方法
+    {
+        Console.WriteLine(&quot;I&apos;m lowerVVV&quot;);
+    }
+}
+</code></pre><p>Abstract</p>
+<p>abstract抽象方法则更像是一个接口(Interface)方法</p>
+<p>被标注为abstract的方法不能有具体的实现！</p>
+<p>而且如果有方法被标注为abstract, 则这个类需要被标注为abstract</p>
+<p>详情<br>具体关于virtual 和 abstract的区别可以参看：<a href="http://www.cnblogs.com/MayGarden/archive/2010/04/04/1704279.html" target="_blank" rel="external">http://www.cnblogs.com/MayGarden/archive/2010/04/04/1704279.html</a></p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-25-reading_10000/">
+                [读书笔记]《一万小时天才理论》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-25
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://img1.douban.com/lpic/s4595192.jpg" alt="《一万小时天才理论》封面"></p>
+<p>花了几天的闲杂时间看完了这本书，书名略有哗众取宠之嫌，不然便是作者对于天才的理解有别于我日常的理解。如果将“天才”改为“大师级工匠”我觉得更为贴切。该书的中心思想便是<strong>[练习 纠正]+ [能人巧匠]，即无数次的练习+纠正，最后使你成为能人巧匠。</strong></p>
+<p>以下为读书摘要：</p>
+<p>1.精深练习的三点注意事项：</p>
+<p><strong>I.放慢练习</strong></p>
+<blockquote>
+<p>慢速练习可以使练习者更加关注错误，每次练习都提高了精确度；更有助于塑造技能的形状和节奏。</p>
+</blockquote>
+<p>这点我在练琴时颇有体会，在弹奏复杂的小节或者是含有一些指法技巧的小节时，快速弹奏发出几个模糊沉闷的音可以蒙混过关，但是对于这个小节的弹奏能力却不太容易进步。坚持快速通关造成的恶果就是每次这个小节都只能滥竽充数蒙混过关。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-25-reading_10000/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-22-csharp_solution/">
+                [C#]问题及解决方案汇总
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-22
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>该笔记最没技术含量，但是却非常实用。</p>
+<h2 id="1-未能找到类型或命名空间名称"><a href="#1-未能找到类型或命名空间名称" class="headerlink" title="1.未能找到类型或命名空间名称"></a>1.未能找到类型或命名空间名称</h2><p>有些时候，你明明已经添加了某个引用到你的项目中，敲代码的时候也能弹地出来，但就是过不了编，仔细一看会发现一个小警告，警告大意如下：</p>
+<blockquote>
+<p>未能解析引用的程序集“… , Version= … , Culture=… … ”，因为它对不在当前目标框架“.NETFramework,Version=v4.0,Profile=Client”中的“System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”具有依赖关系。请删除对不在目标框架中的程序集的引用，或考虑重新确定项目的目标。</p>
+</blockquote>
+<p><strong>**.</strong>解决方法：**</p>
+<p>工程属性 -&gt; 应用程序 -&gt;目标框架，把.NetFramework 4.0 Client Profile修改为NetFramework 4.0 即可<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-22-csharp_solution/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-22-csharp_webbrowse/">
+                [C#]有关WebBrowser
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-22
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="WebBrowser窗口自动滚动"><a href="#WebBrowser窗口自动滚动" class="headerlink" title="WebBrowser窗口自动滚动"></a>WebBrowser窗口自动滚动</h2><p>this.webBrowser.Document.Window.ScrollTo(0, webBrowser1.Document.Body.ScrollRectangle.Height);</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-22-csharp_webbrowse/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-20-python_switchandcase/">
+                [Python]switch,case和深浅拷贝
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-20
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="switch-amp-case"><a href="#switch-amp-case" class="headerlink" title="switch &amp; case"></a>switch &amp; case</h2><p>Python没有switch…case的语法，不过可以用Dictionary的特性来写出同样功能的代码，甚至还可以写出更猛的代码</p>
+<p>等价的Python代码：</p>
+<pre><code>def f1():
+    print &apos;f1&apos;
+
+def f2():
+    print &apos;f2&apos;
+
+switcher = 
+{
+  1: f1,
+  2: f2,
+}
+
+#调用时
+switcher[1]() # 将输出 f1
+switcher[2]() # 将输出 f2
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-20-python_switchandcase/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-20-python_dictionary-sort/">
+                [Python]列表排序 & 字典排序
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-20
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="List-Sort"><a href="#List-Sort" class="headerlink" title="List Sort"></a>List Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">l = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>]</div><div class="line">sorted(l)</div><div class="line">sorted(l, reverse=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-20-python_dictionary-sort/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-20-dp-strategy/">
+                [读书笔记]策略模式
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-20
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><em>《HeadFirst设计模式》读书笔记系列</em></p>
+<h2 id="看起来美好的面向对象"><a href="#看起来美好的面向对象" class="headerlink" title="看起来美好的面向对象"></a>看起来美好的面向对象</h2><p>学过面向对象的都知道继承可以重用父类中的一些方法，从而减少很多劳动量：</p>
+<p>现有场景如下：</p>
+<blockquote>
+<p>玩具工厂生产各种鸭子，有优雅鸭子(ElegantDuck)，爵士鸭子(DukeDuck)，霸王鸭子(KingDuck)，均继承自超类鸭子(Duck)，他们都是可以飞行的，并且在飞行时执行统一的方法 Fly() —— 喊叫”I’m flying.” 于是优雅、爵士和霸王顺理成章地继承了超类的飞行方法。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-20-dp-strategy/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/0english_notebook_Friends/">
+                我的英文口语练习册_Friends
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-17
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Nothing to display<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/0english_notebook_Friends/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+  </div>
+
+  
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">&raquo;</a>
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="机器学习,广告,推荐," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> [转]搜狐基于Spark的新闻和广告推荐实战 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [转]搜狐基于Spark的新闻和广告推荐实战
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-09-04
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><br>略微整理了一下，总而言之，搜狐目前主要也是使用Spark MLlib做广告推荐，CTR中常用的算法应该是LR和GBDT(关于GBDT可以<a href="http://www.cnblogs.com/leftnoteasy/archive/2011/03/07/random-forest-and-gbdt.html" target="_blank" rel="external">参看这里</a>)。<br><br>另外原文中提到的Facebook的论文可以<a href="http://www.quinonero.net/Publications/predicting-clicks-facebook.pdf" target="_blank" rel="external">参看这里</a><br></blockquote>
+
+<p>本文转载自<a href="http://mp.weixin.qq.com/s?__biz=MzA3MjY1MTQwNQ==&amp;mid=207251951&amp;idx=3&amp;sn=2476db97c4678beddb33f105288cae19&amp;3rd=MzA3MDU4NTYzMw==&amp;scene=6#rd" target="_blank" rel="external">CSDN云计算</a></p>
+<a id="more"></a>
+<h2 id="以下为演讲实录"><a href="#以下为演讲实录" class="headerlink" title="以下为演讲实录"></a>以下为演讲实录</h2><p>我今天的分享主要偏应用层面的，介绍一下我们团队在新闻推荐和广告方面的一些心得。从业务层面来讲，我们主要接触了广告和新闻推荐。它们相似点是都可以看做一个点击率估计的任务。根据用户的属性，估计一下哪个广告，哪个新闻用户可能点击，把这个可能点击的推荐给用户。</p>
+<p>为了完成这个点击率预估，我们一般会收集特征，一般是从三个层面，一个是用户层面，一般包括用户的人口属性以及兴趣属性。第二就是item层面，例如新闻的分类，关键字，topic。广告也有一些属性，广告的类型，广告的文字描述。第三个层面是上下文，这个用户访问的时间是什么，广告位所在的内容页属性。所以整个特征的描述，会从这三个维度去匹配，匹配到一个最佳点，找到用户最可能点击的广告或者是新闻。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/zxoLaeCI28QDlYW4u1JibKU475nR2lVL2Qv75OATnw44YrHX2EHWtdCHNURiboQNbd56YcnVde1bdIonRJd2Upmg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1" alt="广告系统架构图"></p>
+<p>上面是各个来源的广告请求。下面包括三个部分：左边这块主要是下面左边这块主要是数据准备，包括ctr模型，用户定向标签，内容页属性等。右边是主要是广告索引，根据广告主定向条件和用户定向标签以及广告位信息检索出可以参与竞价的广告。这一部分可能的侯选的广告会进入到中间黄色的Ranking部分，综合考虑到广告的估计点击率和广告主的出价对广告做排序。Ranking下面的模块主要是做广告投放策略的控制，比如现在是出竞价广告还是出展示广告。推荐系统架构也非常类似，大体上也可以分为用户/页面属性，索引和排序三大模块。</p>
+<h2 id="用户兴趣标签的建立"><a href="#用户兴趣标签的建立" class="headerlink" title="用户兴趣标签的建立"></a>用户兴趣标签的建立</h2><p>对一个媒体网站来讲，一个比较重要的任务就是获取用户对于不同类型文章的兴趣分布。用户的兴趣分布会被作为用户属性标签，和其他类型的标签（例如人口属性等）一起用作推荐的模型特征。这里的问题在于用户阅读新闻的分布会集中在几个热点类别上。</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/zxoLaeCI28QDlYW4u1JibKU475nR2lVL2yicZtAHHu7YSRaiaaknVx7yiaNHZGR5w5UUCIhbMiaonZDdZbubepecUJg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1" alt="Example"></p>
+<p>上面是我们统计了手机搜狐网一个月的阅读新闻分布。发现社会新闻，国内新闻，娱乐新闻这三大类加在一起就超过了50%的流量。具体原因首先是一些热点新闻，基本上是属于社会的热点事件，这些是有巨大的点击量的。另外新闻的曝光也是有偏的曝光，得到了大量的曝光就会得到大的点击量。而一些相对反应个性的新闻曝光量比较少。</p>
+<p><strong>所以我们对用户兴趣的建模不能建立在用户阅读新闻的绝对分布上，而应该是用个体的分布相对于所有用户平均分布的偏移度来建模</strong>(导演标注：这个工作很重要)。我们把一个月的用户阅读新闻做了聚类，挑出两个有特点的类别，统计用户访问新闻的分布，以及把它和所有用户的平均分布做比较，下图是其中两个例子：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/zxoLaeCI28QDlYW4u1JibKU475nR2lVL2Xs7vLOH6WPfBW1KeJOHNPHDcicyjickdqwhiaaNCoQ92sWFpwQSDgqSzg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1" alt="Example"></p>
+<p>这两个图当中，蓝色的线都是用户的平均分布。左边这个图，红色线我们称之为是财经爱好者的群体。这个群体财经的点击量明显高于平均曲线，而对新闻类（社会和国内新闻）差异并不太大。但如果按点击量绝对值的话财经、新闻两类的点击量相似。右边这个图是军事爱好者的阅读者，同时对财经新闻的阅读量也是比平均分布高一些，低于平均分布的也是娱乐和社会新闻。也就是说这类用户和左边有点像，相对财经和军事阅读量高，同时对娱乐和社会新闻感兴趣的低一些。</p>
+<h2 id="用户兴趣评估"><a href="#用户兴趣评估" class="headerlink" title="用户兴趣评估"></a>用户兴趣评估</h2><p>第二个问题是我们用来收集用户兴趣的话，我们必须考虑到用户的长期兴趣和短期兴趣。比如用户是体育迷或者是军事迷，这是他的长期兴趣。还有是受到一些突发事件的影响，例如奥运会，用户短期的兴趣会发生变化。所以我们要从短期和长期两个角度评价他的兴趣。下面这个图示意了我们做用户标签计算的流程：</p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/zxoLaeCI28QDlYW4u1JibKU475nR2lVL26kiaSFQibYcGLoG2uSztNSzj2Drzb5eGtJCZvXWib2y8oYriaw5Iib9SL6Q/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1" alt="用户标签计算流程"></p>
+<p>用户的点击数据会放在日志系统（HDFS）里，新闻的分类标签数据（CMS标签）存放在新闻数据库（MySQL）。这些标签首先会和用户日志做一个join，得到一个（用户，标签）列表。计算出分布之后，会和平均点击分布在每个新闻类型的维度上计算一个偏离度，这个偏离度会被量化之后得到一个标签权重值。这样就得到了每个用户的兴趣标签，然后存到redis库里。</p>
+<p>标签的计算基于Spark实现。由于Spark提供了非常丰富的数据处理操作，像Map、reduce，filter，join，cogroup，以及scala语言的简洁性，使得代码量大为减少。另外由于Spark是内存计算，整个流程的处理时间相对Hadoop减少5~10倍。</p>
+<h2 id="CTR预测"><a href="#CTR预测" class="headerlink" title="CTR预测"></a>CTR预测</h2><p>常用的CTR预测的算法包括LR（Logistic  Regression）， FM(Factorization Machines)， GBDT等等。像LR和GBDT， Spark Mllib都提供了相应的实现，另外台湾大学的Liblinear也有一个Spark版本的LR算法的实现。Mllib的LR是基于LBFGS的实现，而Liblinear是基于TRON的实现。实际当中我们测试过这两个算法，发现优化的性能非常接近。</p>
+<p>FM目前在Spark上有一个JIRA （SPARK-7008），但是目前还没有正式release。LR是最常用的算法，好处是简单明了，效果分析也相对容易，问题在于想要达到好的效果需要尝试大量的特征组合，特征工程比较费劲。FM和GBDT都是非线性的分类器（FM可以看做二次的），省去了复杂的特征组合的过程，性能也往往较好，但是出了问题不太好分析原因。实际当中可以先尝试LR，当性能不满足要求时再试FM或GBDT。</p>
+<p>Facebook的一篇文章（Practical Lessons from Predicting Clicks on Ads at Facebook）提出先使用GBDT得到一个分类器，其中每棵树的叶子节点作为特征再送入LR训练分类器。解决了繁琐的特征组合问题。使用LR还有一个原因是比较好处理探索和利用问题(Exploartion &amp; Exploitation)。</p>
+<p>由于每天都会有新的新闻产生，而对这些新闻一开始点击率估计可能不准确，因此需要通过适当的投放从而收集信息以提升点击率的估计。这属于牺牲短期利益以获取长期利益的最大化。对于线性模型实现探索和利用有Yahoo的LinUCB以及微软的OBPR。另外对FM，也可以通过Bayes化实现E&amp;E (Bayesian factorization machines, 2011)，但是实现要相对复杂一些。目前我们的建模主要依赖spark平台。整个集群规模目前约为500台机器，以Spark on yarn方式部署。除了广告和推荐建模外，还支撑用户定向，广告系统BI的任务。</p>
+<p>时间关系今天的分享就到这里。谢谢大家！</p>
+<p>QA（部分）</p>
+<p>【问题】不知道搜狐数据分析在R的使用上如何？</p>
+<p>李滔：我们现在R使用较少。BI类需求基本依赖Hive，SparkSql这样的工具。算法类主要是Spark。R会有一些临时的任务，例如分布的统计等。</p>
+<p>【问题 】谢谢老师分享，能否再介绍下新闻个性推荐？  </p>
+<p>李滔：其实新闻个性推荐和上面思路基本一致。包括用户兴趣建模（离线和在线标签），新闻点击率估计两个主要任务。基本都是上面的方法。</p>
+<p>【问题】模型拟定和训练上，过拟合问题是否可以谈谈？</p>
+<p>李滔：过拟合一般通过仔细的参数选择和交叉验证这样的实验手段可以克服。首先根据结构风险理论，简单模型例如线性相对非线性模型较容易避免过拟合。而适当增大模型的正则化项的系数也会有帮助。但是对大数据来说，交叉验证时间代价太大。</p>
+<p>【问题】Bi类需求在hive和sparkSQL实现，那前台显示有没有好工具？如果有比较明细的数据呢？</p>
+<p>李滔：展示工具，商用的比如Tableau，开源的比如Saiku等。</p>
+<p>群内朋友补充：hue也可以。</p>
+<p>【问题】在使用spark mllib的过程中有没有什么踩坑的经验可以分享，我最近在使用随机森林算法的时候有一个job hang住了，在日志里面没有发现任何错误，怀疑是死锁，类似的情况你们有遇到吗？</p>
+<p>李滔：mllib比较常见的如内存不足，GC，参数设置（例如frameSize等），具体仔细阅读Spark的性能调优的tutorial可以了解一大部分。关于你说的job hang住的问题，建议先分析是不是内存的原因。</p>
+<p>【问题】李涛老师，问一下你们计算新闻相似度是用什么算法</p>
+<p>李滔：新闻相似度简单方法包括余弦距离，复杂一点可以用pLSA，LDA这样的话题模型。更复杂一点就是Deep Learning了。</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/"> #机器学习 </a>
+          
+            <a href="/tags/广告/"> #广告 </a>
+          
+            <a href="/tags/推荐/"> #推荐 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-11-12-calendar_tools/">我最近使用的任务、事件管理工具</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-07-13-arbitrage-bitcoin/">[转]一个比特币套利系统，每天躺着收钱</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#以下为演讲实录"><span class="nav-number">1.</span> <span class="nav-text">以下为演讲实录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户兴趣标签的建立"><span class="nav-number">2.</span> <span class="nav-text">用户兴趣标签的建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户兴趣评估"><span class="nav-number">3.</span> <span class="nav-text">用户兴趣评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTR预测"><span class="nav-number">4.</span> <span class="nav-text">CTR预测</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

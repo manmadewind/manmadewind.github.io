@@ -1,0 +1,688 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="信息检索,机器学习,推荐系统," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    analytics: {
+      google: 'UA-33400960-1'
+    },
+    sidebar: 'post'
+  };
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d670c0da90ecd01b8baf1ff3c3eda42e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <title> [Project]学术论文推荐系统 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">集百折</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              [Project]学术论文推荐系统
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-10-10
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>这是我们在11年数据挖掘课（导师：刘莹）和信息检索课（导师：王斌）的联合期末Project，因为这两门课程的要求有些焦急，所以在求得两位任课老师同意的情况下，我们开始把两门课程里学到的知识融合在了一个项目里，我在这个项目上还是颇费了些心思的。</p>
+<h2 id="I-任务概述"><a href="#I-任务概述" class="headerlink" title="I.任务概述"></a>I.任务概述</h2><p>如何能够有目标地、有选择地、正确地利用学习资源是一个亟待解决的问题。目前研究生选择课程的随意性高，质量难以预测，而且费时费力。而目前流行的推荐系统，大多依靠用户的输入或者长期的兴趣，不能及时准确地感知学生的学习意图。因此，学习意图感知和推荐系统是提高研究生培养水平的一个重要手段。此系统通过信息检索和数据挖掘等技术将学术资源进行有效地管理，利用数据挖掘技术捕获或预测每位学习者的学习意图和兴趣，主动地向学习者推荐与其兴趣相关的课程资源。这样，可以提高信息的到达率，提高学习者在网络环境下学习的质量。</p>
+<h2 id="II-系统总体架构"><a href="#II-系统总体架构" class="headerlink" title="II.系统总体架构"></a>II.系统总体架构</h2><p><img src="\img\2012-10-10-project-ir-recommend-01.png" alt="示意图"></p>
+<a id="more"></a>
+<h3 id="1-推荐"><a href="#1-推荐" class="headerlink" title="1.推荐"></a>1.推荐</h3><ul>
+<li><p>a. 在推荐系统方面，主要采用Apriori算法，以用户三个月内的选课/阅读记录作为有效数据，来进行关联规则的挖掘。</p>
+</li>
+<li><p>b. 当用户点击进入某个页面时，我们将会使用2-item的关联规则向当前用户推荐喜欢该课程/书的人还喜欢哪些东西。</p>
+</li>
+<li><p>c. 对于冷启动问题我们并没有想出太好的方法，只能是推荐给用户最热门的（关注度最高的）课程/论文。</p>
+</li>
+<li></li>
+</ul>
+<h3 id="2-用户聚类"><a href="#2-用户聚类" class="headerlink" title="2.用户聚类"></a>2.用户聚类</h3><p>采用ROCK算法对用户进行聚类，并在首页向当前用户推荐其他兴趣相仿的用户。让当前用户可以知道和他兴趣类似的人平时都选了什么课喜欢哪些论文。</p>
+<h3 id="3-信息检索"><a href="#3-信息检索" class="headerlink" title="3.信息检索"></a>3.信息检索</h3><ul>
+<li><p>a.主要采用2-gram的分词方法对文档集进行处理，同时考虑索引查找的效率，还将词项(term)存入了一个哈希表中，这样可以大大提高检索的效率。在权重方向的考虑——将标题中出现的词项权重得较高，而其他部分出现词项的权重都保持一致。权重将直接影响到某个词项的tf值，进而影响到最终的检索排序结果。</p>
+</li>
+<li><p>b.评分系统以tf * idf + score(用户评分)的方式进行。</p>
+</li>
+</ul>
+<p>因为以上的每一种操作都需要非常高的时空复杂度都很高，所以放在每天的0:00点进行这些任务，查找到的关联规则、用户聚类集倒排记录表都存放至服务器端的内存中，供需要时快速调取。</p>
+<h3 id="III-实现细节"><a href="#III-实现细节" class="headerlink" title="III.实现细节"></a>III.实现细节</h3><p>搜索引擎设计</p>
+<p><img src="\img\2012-10-10-project-ir-recommend-02.png" alt="示意图"></p>
+<h4 id="Apriori关联规则挖掘"><a href="#Apriori关联规则挖掘" class="headerlink" title="Apriori关联规则挖掘"></a>Apriori关联规则挖掘</h4><p>有关此算法的具体细节可以<a href="http://en.wikipedia.org/wiki/Apriori_algorithm" target="_blank" rel="external">参看这里</a></p>
+<p>Apriori是一种用于挖掘商品间关联规则的方法，假设我们有已知的几个用户和他们的购物清单</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">甲， 牙膏、电池</div><div class="line"></div><div class="line">乙， 牙膏、电池、沐浴露</div><div class="line"></div><div class="line">丙， 牙膏、电池、洗发水</div></pre></td></tr></table></figure>
+<p>光是用肉眼我们就可以一眼看出，在这几件商品中，牙膏和电池具有极强的关联性，好像他们总是成双成对的出现的，于是当一个新来的用户丁出现时，当他往他的购物车中放入了牙膏，我们就会很自然地向他推荐电池。</p>
+<p>当然，当数据量大时我们是很难用肉眼去观测出这些商品之间的关联性的，于是算法Apriori便应运而生。另外值得注意的是，Apriori的时间复杂度非常高，可以借助于Jiawei Han提出的FP-Growth来替换它用以计算关联规则。(有关FP-Growth的具体信息可以<a href="http://zh.scribd.com/doc/23585266/FP-Growth-Algorithm" target="_blank" rel="external">看这里</a>)</p>
+<h4 id="Rock用户聚类"><a href="#Rock用户聚类" class="headerlink" title="Rock用户聚类"></a>Rock用户聚类</h4><p>//TODO:</p>
+<p>数据库设计</p>
+<p><img src="\img\2012-10-10-project-ir-recommend-03.png" alt="E/R"></p>
+<ul>
+<li>课程/论文（item）</li>
+</ul>
+<pre><code>课程/论文编号（number）
+
+描述（description）
+
+课程教师/论文作者（author）
+
+名称（title）
+
+摘要（introduction）
+
+课程/论文链接（hyperlink）
+
+关注人数（concernNum）
+
+标记位（type）
+</code></pre><ul>
+<li><p>关注（Concern）</p>
+<p>  关注时间（date）</p>
+<p>  评分（score）</p>
+</li>
+</ul>
+<ul>
+<li><p>用户（Member）</p>
+<p>  用户名字（name）</p>
+<p>  用户账号（account）</p>
+<p>  用户密码（password）</p>
+</li>
+</ul>
+<h2 id="IV-小组成员及分工"><a href="#IV-小组成员及分工" class="headerlink" title="IV.小组成员及分工"></a>IV.小组成员及分工</h2><p>王丰（本人）：</p>
+<ol>
+<li><p>项目的架构（UI-BLL-DAL三层框架）</p>
+</li>
+<li><p>网络爬虫（Spider）</p>
+</li>
+<li><p>搜索引擎部分（索引、倒排记录表、向量空间模型）</p>
+</li>
+<li><p>数据库建立和维护</p>
+</li>
+<li><p>页面实现（ASP.NET）</p>
+</li>
+</ol>
+<p>熊浩：</p>
+<ol>
+<li><p>关联规则挖掘版块：个性课程推荐、关联课程推荐（Apriori算法）</p>
+</li>
+<li><p>热门课程推荐版块</p>
+</li>
+</ol>
+<p>姚尧：</p>
+<ol>
+<li><p>数据库模式定义（E-R图）</p>
+</li>
+<li><p>用户聚类版块（ROCK算法）</p>
+</li>
+<li><p>项目文档组织</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/信息检索/"> #信息检索 </a>
+          
+            <a href="/tags/机器学习/"> #机器学习 </a>
+          
+            <a href="/tags/推荐系统/"> #推荐系统 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012-10-13-xiongqinglai/">[读书笔记]我和爷爷熊庆来</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012-10-10-booknote-recommend/">[读书笔记]推荐系统实践</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Marvin Wang" />
+          <p class="site-author-name">Marvin Wang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/manmadewind" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2341528/marvin-w" target="_blank">stackOverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://book.douban.com/people/1210542/collect" target="_blank">读书清单</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-任务概述"><span class="nav-number">1.</span> <span class="nav-text">I.任务概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-系统总体架构"><span class="nav-number">2.</span> <span class="nav-text">II.系统总体架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-推荐"><span class="nav-number">2.1.</span> <span class="nav-text">1.推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户聚类"><span class="nav-number">2.2.</span> <span class="nav-text">2.用户聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-信息检索"><span class="nav-number">2.3.</span> <span class="nav-text">3.信息检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-实现细节"><span class="nav-number">2.4.</span> <span class="nav-text">III.实现细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Apriori关联规则挖掘"><span class="nav-number">2.4.1.</span> <span class="nav-text">Apriori关联规则挖掘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rock用户聚类"><span class="nav-number">2.4.2.</span> <span class="nav-text">Rock用户聚类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-小组成员及分工"><span class="nav-number">3.</span> <span class="nav-text">IV.小组成员及分工</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2012 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Marvin Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+</html>

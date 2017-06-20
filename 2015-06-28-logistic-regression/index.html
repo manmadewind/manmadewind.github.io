@@ -176,14 +176,14 @@
 
       
         <h2 id="1-从模型开始"><a href="#1-从模型开始" class="headerlink" title="1. 从模型开始"></a>1. 从模型开始</h2><p>Logistic Regression(常被翻译做“逻辑回归”) 一种分类模型，由于算法的简单和高效，在实际中应用非常广泛，尤其是它具有出色地将众多变量糅杂在一起并最终输出一个可以当做概率的值(大熔炉即视感)，因此颇为常用。</p>
-<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>\( f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}} \)</p>
+<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>$ f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}} $</p>
 <p>该函数的神奇之处在于，可以将原本线性无拘无束的t值困在[0,1]范围内，并变换出一条柔美的S型曲线(Sigmoid Curve)。</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="Sigmoid Curve"></p>
 <p>其实该函数还有另外一个名字——<code>Logistic Function</code>.</p>
 <h3 id="1-2-Logistic-Regression-Model"><a href="#1-2-Logistic-Regression-Model" class="headerlink" title="1.2 Logistic Regression Model"></a>1.2 Logistic Regression Model</h3><p>借助Logistic Function, 这里定义Logistic回归模型。</p>
 <p>$$P(Y=1|X) = \frac{exp(wx+b)}{1+exp(wx+b)} $$<br>$$P(Y=0|X) = \frac{1}{1+exp(wx+b)}$$</p>
-<p>其中， \( x \in R^n \)是输入， \( Y \in \) {0,1}是输出，\( w,b \)为参数(w-权值, b-偏置)</p>
-<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数\( (wx+b) \)转换成概率P(Y=1|X)</p>
+<p>其中， $ x \in R^n $是输入， $ Y \in $ {0,1}是输出，$ w,b $为参数(w-权值, b-偏置)</p>
+<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数$ (wx+b) $转换成概率P(Y=1|X)</p>
 <a id="more"></a>
 <h2 id="2-举个栗子"><a href="#2-举个栗子" class="headerlink" title="2. 举个栗子"></a>2. 举个栗子</h2><p>假装我们有一个现成的广告模型</p>
 <table>
@@ -212,8 +212,8 @@
 </tr>
 </tbody>
 </table>
-<p>此时来了一个用户，对应的输入\( X=(x0,x1,x2,x3) = (1,0.9,1,20) \)</p>
-<p>则\( wx = 1 \times 0.1 + 0.9 \times 0.8 + 1 \times 0.3+20 \times 0.2 = 5.12 \)</p>
+<p>此时来了一个用户，对应的输入 $X=(x0,x1,x2,x3) = (1,0.9,1,20)$<br>其中x0无论何时均为1，因为x0对应的参数w0其实为b, x0w0=b,这样就可以把原先的$wx+b=w1x1+… w2x2 + … + wnxn + b$简单表示成为 $wx=w1x1+…+wnxn + w0x0$，用$w0x0$替代原先的$b$</p>
+<p>则<br>$$ wx = w0x0+w1x1+w2x2+w3x3 \\<br> = 1 \times 0.1 + 0.9 \times 0.8 + 1 \times 0.3+20 \times 0.2 \\<br> = 5.12 $$</p>
 <p>所以最终的预测用户点击率为：<br>$$ P(Y=1|X) = \frac{exp(wx)}{1+exp(wx)} = \frac{exp(5.12)}{1+exp(5.12)} = 0.994 $$</p>
 <h2 id="3-参数训练"><a href="#3-参数训练" class="headerlink" title="3. 参数训练"></a>3. 参数训练</h2><p>对于给定的训练集，可以采用<code>极大似然估计法</code>估计模型参数</p>
 <ul>
@@ -237,15 +237,15 @@
 </li>
 </ol>
 <ol>
-<li>如果K个类别是互斥的，即 Y=k 的时候意味着Y不能取其他的值，这种情况下，假设Y的取值集合：\( {1,2,\cdots,K} \)</li>
+<li>如果K个类别是互斥的，即 Y=k 的时候意味着Y不能取其他的值，这种情况下，假设Y的取值集合：$ {1,2,\cdots,K} $</li>
 </ol>
 <p>$$\begin{aligned}<br>P(Y=k|X) &amp;= \frac{exp(w_{k}x + b)}{1+\sum_{i}^{K-1}exp(w_{i}x+b)},  k=1,2,\cdots,K-1 \\<br>P(y=K|X) &amp;= \frac{1}{1+\sum_{i}^{K-1}exp(w_{i}x+b)}\end{aligned}$$</p>
 <h2 id="5-应对非线性的分类"><a href="#5-应对非线性的分类" class="headerlink" title="5. 应对非线性的分类"></a>5. 应对非线性的分类</h2><p>Logistic回归提出时用来解决线型分类问题，其分离面是一个线型超平面wx+b，如果将这个超平面改成非线性的，是否也可以正确分类呢，如果像SVM一样加入核扩展到高维是否也可行呢？</p>
 <p>以下答案来自网络加上我自己的理解整理而成。</p>
 <h3 id="5-1-正统方法"><a href="#5-1-正统方法" class="headerlink" title="5.1 正统方法"></a>5.1 正统方法</h3><p>回答是可以，只要使用kernel trick（kernel trick之前在SVM中提过，具体可以<a href="/2015-04-10-svm-abs/">点击查看</a>）。</p>
-<p>不过，通常使用的kernel都是隐式的，也就是找不到显式地把数据从低维映射到高维的函数，而只能计算高维空间中数据点的内积。在这种情况下，Logistic Regression模型就不能再表示成$wx+b$的形式(primal form)，而只能表示成 \( \sum_i a_i \langle x_i,x \rangle +b \) 的形式(dual form)。</p>
-<p>忽略那个b的话，primal form的模型的参数只有w，只需要一个数据点那么多的存储量；而dual form的模型不仅要存储各个\(a_i\)，还要存储训练数据\(x_i\)本身，这个存储量就大了。</p>
-<p>SVM也是具有上面两种形式的。不过，与Logistic Regression相比，它的dual form是稀疏的——只有支持向量的\(a_i\)才非零，才需要存储相应的\(x_i\)。所以，在非线性可分的情况下，SVM用得更多。</p>
+<p>不过，通常使用的kernel都是隐式的，也就是找不到显式地把数据从低维映射到高维的函数，而只能计算高维空间中数据点的内积。在这种情况下，Logistic Regression模型就不能再表示成$wx+b$的形式(primal form)，而只能表示成 $ \sum_i a_i \langle x_i,x \rangle +b $ 的形式(dual form)。</p>
+<p>忽略那个b的话，primal form的模型的参数只有w，只需要一个数据点那么多的存储量；而dual form的模型不仅要存储各个$a_i$，还要存储训练数据$x_i$本身，这个存储量就大了。</p>
+<p>SVM也是具有上面两种形式的。不过，与Logistic Regression相比，它的dual form是稀疏的——只有支持向量的$a_i$才非零，才需要存储相应的$x_i$。所以，在非线性可分的情况下，SVM用得更多。</p>
 <h3 id="5-2-野路子"><a href="#5-2-野路子" class="headerlink" title="5.2 野路子"></a>5.2 野路子</h3><p>说句题外的，很多数据没有我们想象的那么复杂。</p>
 <p>我在实际中发现用逻辑斯蒂回归直接硬搞，对非线性数据进行训练，也能得到一个还能接受的结果，所以有的时候先别急着上SVM或者加kernal trick，先试试暴力训练吧：）</p>
 <h2 id="6-和高斯朴素贝叶斯-GNB-的关系"><a href="#6-和高斯朴素贝叶斯-GNB-的关系" class="headerlink" title="6. 和高斯朴素贝叶斯(GNB)的关系"></a>6. 和高斯朴素贝叶斯(GNB)的关系</h2><p>Gaussian Naive Bayes(GNB)是Naive Bayes的输入X为连续变量时的情况，并且假设所有的P(x|y)独立，且符合高斯分布，这种情况下有模型如下：</p>
@@ -254,7 +254,7 @@
 <p>$$P(X|Y=k) = \sum_{i} P(x_i|Y=k) \\<br>P(x_i|Y=k) = \frac{1}{\sigma_i \sqrt{2 \pi}} e^{\frac{-(x_i -\mu_{ik})^2}{2\sigma_i^2}}$$</p>
 <p>现在，根据以上的这种情况，可以推导出LR模型，过程如下：</p>
 <p>$$\begin{aligned}<br>P(Y=1|X) &amp;= \frac{P(Y=1)P(X|Y=1)}{P(Y=1)P(X|Y=1)+P(Y=0)P(X|Y=0)} \\<br>&amp;= \frac{1} {1+\frac{P(Y=0)P(X|Y=0)} {P(Y=1)P(X|Y=1)} } \\<br>&amp;= \frac{1}{1+exp(ln\frac{P(Y=0)P(X|Y=0)}{P(Y=1)P(X|Y=1)})} \\<br>&amp;= \frac{1}{1+exp(ln \frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})}<br>\end{aligned}$$</p>
-<p>根据上文中提到GNB满足的假设情况，上式中的 \((ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})\)可以展开如下：</p>
+<p>根据上文中提到GNB满足的假设情况，上式中的 $(ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})$可以展开如下：</p>
 <p>$$\begin{aligned}<br>ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)}<br>&amp;= ln\frac{P(Y=0)}{P(Y=1)} + \sum_{i} (ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i} + \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2} )\\<br>&amp;= (ln\frac{P(Y=0)}{P(Y=1)} + \sum{i} ln \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2})+ \sum_{i} ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i}  \\<br>&amp;= w_0 + \sum_i w_i x_i<br>\end{aligned}$$</p>
 <p>因此，</p>
 <p>$$P(Y=1|X) = \frac{1}{1+exp(w_0 + \sum_i w_i x_i)}$$</p>

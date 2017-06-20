@@ -192,7 +192,7 @@ table.ReadXml(fileName2);
 </code></pre><p>反过来，byte[]转成string：</p>
 <pre><code>string str = System.Text.Encoding.Default.GetString ( byteArray );
 </code></pre><p>其它编码方式的，如System.Text.UTF8Encoding，System.Text.UnicodeEncoding class等；例如：<br>string类型转成ASCII byte[]：（”01” 转成 byte[] = new byte[]{ 0x30, 0x31}）<br>byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );<br>ASCII byte[] 转成string：（byte[] = new byte[]{ 0x30, 0x31} 转成 “01”）<br>string str = System.Text.Encoding.ASCII.GetString ( byteArray );</p>
-<h2 id="嵌入资源"><a href="#嵌入资源" class="headerlink" title="嵌入资源"></a>嵌入资源</h2><p>运用工程中的文件，并不能直接将文件拖入Resources文件夹中，而是需要先展开Properties文件夹，双击Resources.resx,再用鼠标点击“添加资源”，用这种方式才可以将文件以比较正统的方式加入工程中并且能被该工程所应用。<br>接下来就可以在代码中使用Properties.Resources<em>.</em><strong><em>对应的文件名</em></strong> 来访问资源</p>
+<h2 id="嵌入资源"><a href="#嵌入资源" class="headerlink" title="嵌入资源"></a>嵌入资源</h2><p>运用工程中的文件，并不能直接将文件拖入Resources文件夹中，而是需要先展开Properties文件夹，双击Resources.resx,再用鼠标点击“添加资源”，用这种方式才可以将文件以比较正统的方式加入工程中并且能被该工程所应用。<br>接下来就可以在代码中使用Properties.Resources_._<strong>_对应的文件名_</strong> 来访问资源</p>
 <h2 id="有关ComboBox"><a href="#有关ComboBox" class="headerlink" title="有关ComboBox"></a>有关ComboBox</h2><p>使ComboBox中显示一套值，而后台可以读出对应的实际的值。比如我们在ComboBox中显示的是用户名，而和它对应的用户ID可以直接读取到。</p>
 <pre><code>DataTable table = new DataTable();
 table.Columns.Add(&quot;userName&quot;, typeof(string));

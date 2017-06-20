@@ -195,7 +195,7 @@
 </thead>
 <tbody>
 <tr>
-<td>X0, bias</td>
+<td>X0, bias(上文中的wx+b的b)</td>
 <td>0.1</td>
 </tr>
 <tr>
@@ -214,7 +214,7 @@
 </table>
 <p>此时来了一个用户，对应的输入\( X=(x0,x1,x2,x3) = (1,0.9,1,20) \)</p>
 <p>则\( wx = 1 \times 0.1 + 0.9 \times 0.8 + 1 \times 0.3+20 \times 0.2 = 5.12 \)</p>
-<p>所以最终的预测用户点击率为： \( P(Y=1|X) = \frac{exp(5.12)}{1+exp(5.12)} = 0.994 \)</p>
+<p>所以最终的预测用户点击率为：<br>$$ P(Y=1|X) = \frac{exp(wx)}{1+exp(wx)} = \frac{exp(5.12)}{1+exp(5.12)} = 0.994 $$</p>
 <h2 id="3-参数训练"><a href="#3-参数训练" class="headerlink" title="3. 参数训练"></a>3. 参数训练</h2><p>对于给定的训练集，可以采用<code>极大似然估计法</code>估计模型参数</p>
 <ul>
 <li>似然函数</li>

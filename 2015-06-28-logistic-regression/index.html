@@ -239,7 +239,7 @@
 <ol>
 <li>如果K个类别是互斥的，即 Y=k 的时候意味着Y不能取其他的值，这种情况下，假设Y的取值集合：\( {1,2,\cdots,K} \)</li>
 </ol>
-<p>$$\begin{aligned}<br>P(Y=k|X) &amp;= \frac{exp(w_{k}x + b)}{1+\sum_{i}^{K-1}exp(w_{i}x+b)},  k=1,2,\cdots,K-1 \<br>P(y=K|X) &amp;= \frac{1}{1+\sum_{i}^{K-1}exp(w_{i}x+b)}\end{aligned}$$</p>
+<p>$$\begin{aligned}<br>P(Y=k|X) &amp;= \frac{exp(w_{k}x + b)}{1+\sum_{i}^{K-1}exp(w_{i}x+b)},  k=1,2,\cdots,K-1 \\<br>P(y=K|X) &amp;= \frac{1}{1+\sum_{i}^{K-1}exp(w_{i}x+b)}\end{aligned}$$</p>
 <h2 id="5-应对非线性的分类"><a href="#5-应对非线性的分类" class="headerlink" title="5. 应对非线性的分类"></a>5. 应对非线性的分类</h2><p>Logistic回归提出时用来解决线型分类问题，其分离面是一个线型超平面wx+b，如果将这个超平面改成非线性的，是否也可以正确分类呢，如果像SVM一样加入核扩展到高维是否也可行呢？</p>
 <p>以下答案来自网络加上我自己的理解整理而成。</p>
 <h3 id="5-1-正统方法"><a href="#5-1-正统方法" class="headerlink" title="5.1 正统方法"></a>5.1 正统方法</h3><p>回答是可以，只要使用kernel trick（kernel trick之前在SVM中提过，具体可以<a href="/2015-04-10-svm-abs/">点击查看</a>）。</p>
@@ -251,11 +251,11 @@
 <h2 id="6-和高斯朴素贝叶斯-GNB-的关系"><a href="#6-和高斯朴素贝叶斯-GNB-的关系" class="headerlink" title="6. 和高斯朴素贝叶斯(GNB)的关系"></a>6. 和高斯朴素贝叶斯(GNB)的关系</h2><p>Gaussian Naive Bayes(GNB)是Naive Bayes的输入X为连续变量时的情况，并且假设所有的P(x|y)独立，且符合高斯分布，这种情况下有模型如下：</p>
 <p>$$P(X=x|Y=k)=P(x_1,x_2,\cdots,x_n|Y=k) = \prod_{i} P(x_i|Y=k)$$</p>
 <p>有些时候，GNB还有一些别的假设，(1) 方差与Y无关; (2)方差与X无关；在这两种假设成立的基础上，有</p>
-<p>$$P(X|Y=k) = \sum_{i} P(x_i|Y=k) \<br>P(x_i|Y=k) = \frac{1}{\sigma_i \sqrt{2 \pi}} e^{\frac{-(x_i -\mu_{ik})^2}{2\sigma_i^2}}$$</p>
+<p>$$P(X|Y=k) = \sum_{i} P(x_i|Y=k) \\<br>P(x_i|Y=k) = \frac{1}{\sigma_i \sqrt{2 \pi}} e^{\frac{-(x_i -\mu_{ik})^2}{2\sigma_i^2}}$$</p>
 <p>现在，根据以上的这种情况，可以推导出LR模型，过程如下：</p>
-<p>$$\begin{aligned}<br>P(Y=1|X) &amp;= \frac{P(Y=1)P(X|Y=1)}{P(Y=1)P(X|Y=1)+P(Y=0)P(X|Y=0)} \<br>&amp;= \frac{1} {1+\frac{P(Y=0)P(X|Y=0)} {P(Y=1)P(X|Y=1)} } \<br>&amp;= \frac{1}{1+exp(ln\frac{P(Y=0)P(X|Y=0)}{P(Y=1)P(X|Y=1)})} \<br>&amp;= \frac{1}{1+exp(ln \frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})}<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br>P(Y=1|X) &amp;= \frac{P(Y=1)P(X|Y=1)}{P(Y=1)P(X|Y=1)+P(Y=0)P(X|Y=0)} \\<br>&amp;= \frac{1} {1+\frac{P(Y=0)P(X|Y=0)} {P(Y=1)P(X|Y=1)} } \\<br>&amp;= \frac{1}{1+exp(ln\frac{P(Y=0)P(X|Y=0)}{P(Y=1)P(X|Y=1)})} \\<br>&amp;= \frac{1}{1+exp(ln \frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})}<br>\end{aligned}$$</p>
 <p>根据上文中提到GNB满足的假设情况，上式中的 \((ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)})\)可以展开如下：</p>
-<p>$$\begin{aligned}<br>ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)}<br>&amp;= ln\frac{P(Y=0)}{P(Y=1)} + \sum_{i} (ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i} + \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2} )\<br>&amp;= (ln\frac{P(Y=0)}{P(Y=1)} + \sum{i} ln \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2})+ \sum_{i} ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i}  \<br>&amp;= w_0 + \sum_i w_i x_i<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br>ln\frac{P(Y=0)}{P(Y=1)} + ln \frac{P(X|Y=0)}{P(X|Y=1)}<br>&amp;= ln\frac{P(Y=0)}{P(Y=1)} + \sum_{i} (ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i} + \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2} )\\<br>&amp;= (ln\frac{P(Y=0)}{P(Y=1)} + \sum{i} ln \frac{\mu_{i1}^{2} - \mu{i0}^2} {2\sigma_{i}^2})+ \sum_{i} ln \frac{\mu_{i0} -\mu_{i1} }{ \sigma_{i}^{2} } X_{i}  \\<br>&amp;= w_0 + \sum_i w_i x_i<br>\end{aligned}$$</p>
 <p>因此，</p>
 <p>$$P(Y=1|X) = \frac{1}{1+exp(w_0 + \sum_i w_i x_i)}$$</p>
 <p>看，这就是Logistic Regression的模型呀！</p>

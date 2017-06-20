@@ -55,7 +55,7 @@
 
 
 
-  <title> 谈谈Logistics Regression // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 关于Logistics Regression // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body>
@@ -150,7 +150,7 @@
           
           
             
-              谈谈Logistics Regression
+              关于Logistics Regression
             
           
         </h1>
@@ -176,14 +176,14 @@
 
       
         <h2 id="1-从模型开始"><a href="#1-从模型开始" class="headerlink" title="1. 从模型开始"></a>1. 从模型开始</h2><p>Logistic Regression(常被翻译做“逻辑回归”) 一种分类模型，由于算法的简单和高效，在实际中应用非常广泛，尤其是它具有出色地将众多变量糅杂在一起并最终输出一个可以当做概率的值(大熔炉即视感)，因此颇为常用。</p>
-<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>\ (f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}} \)</p>
+<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>\( f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}} \)</p>
 <p>该函数的神奇之处在于，可以将原本线性无拘无束的t值困在[0,1]范围内，并变换出一条柔美的S型曲线(Sigmoid Curve)。</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="Sigmoid Curve"></p>
 <p>其实该函数还有另外一个名字——<code>Logistic Function</code>.</p>
 <h3 id="1-2-Logistic-Regression-Model"><a href="#1-2-Logistic-Regression-Model" class="headerlink" title="1.2 Logistic Regression Model"></a>1.2 Logistic Regression Model</h3><p>借助Logistic Function, 这里定义Logistic回归模型。</p>
 <p>$$P(Y=1|X) = \frac{exp(wx+b)}{1+exp(wx+b)} \<br>P(Y=0|X) = \frac{1}{1+exp(wx+b)}$$</p>
-<p>其中， $x \in R^n$是输入， $Y \in ${0,1}是输出，$w,b$为参数(w-权值, b-偏置)</p>
-<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数$(wx+b)$转换成概率P(Y=1|X)</p>
+<p>其中， $ x \in R^n $是输入， $ Y \in $ {0,1}是输出，$ w,b $为参数(w-权值, b-偏置)</p>
+<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数$ (wx+b) $转换成概率P(Y=1|X)</p>
 <a id="more"></a>
 <h2 id="2-举个栗子"><a href="#2-举个栗子" class="headerlink" title="2. 举个栗子"></a>2. 举个栗子</h2><p>假装我们有一个现成的广告模型</p>
 <table>

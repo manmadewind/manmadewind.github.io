@@ -152,6 +152,69 @@
           
           
             
+              <a class="post-title-link" href="/2015-07-02-Notice/">
+                博客搬家
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-02
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>2015-07-02, 原来的主机商越来越不靠谱，于是终于打算放弃了接近4年的地盘，打算将博客迁移出来，目前迁移工作长在进行中…</p>
+<p>2015-07-12, 搬家工作已经完成，放弃了之前租用的虚拟主机，在正式切换域名解析的时候突然有点不舍。</p>
+<p>现在将博客托管在Github上，使用Hexo作为引擎。</p>
+<p>希望今后有空时也能记得来积累一些东西哟~</p>
+<p><img src="\img\2013-08-20-mirihi.jpg" alt=""></p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-06-28-logistic-regression/">
                 关于Logistics Regression
               </a>
@@ -730,78 +793,6 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
-                Transform of Hive Streaming
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-02-15
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>我这大半年来大多数时候是在用Hadoop或者Hive对数据进行处理，而在处理hive数据时，有的功能用Hive很难实现或者不能够实现，这个时候就可以引入脚本来帮忙处理，以下整理出我在工作中总结出的一些东西。</p>
-<p>Streaming可以让我在Hive上直接运行python脚本，优点是开发快捷，缺点是效率偏低。</p>
-<p>要使用Streaming进行开发，需要对输出进行转换——使用TRANSFORM()，将默认的输出转换成字符串，该字符串具有如下特点：</p>
-<p>(1) 列之间的分隔符为\t;</p>
-<p>(2) 行之间的分隔符为\n;</p>
-<p>(3) 表中为空的数据将显示成为\N;</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
-<li>标准MapReduce</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -840,7 +831,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -854,7 +845,7 @@ full outer join
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -903,7 +894,7 @@ full outer join
         <div class="copyright">
   
   &copy; &nbsp;  2012 - 
-  2017
+  2018
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

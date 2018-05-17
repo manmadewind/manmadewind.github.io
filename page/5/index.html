@@ -152,6 +152,69 @@
           
           
             
+              <a class="post-title-link" href="/2012-10-07-my-latex-template/">
+                我的LaTeX中文模板
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-10-07
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>常言道，手有模板，心中不慌。以下就是我提炼出来的$LaTeX$中文模板。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-10-07-my-latex-template/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-10-06-invisible-man/">
                 浅析十二/十三大汉图
               </a>
@@ -665,74 +728,6 @@ table.ReadXml(fileName2);
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-07-31-ir_inverted-index/">
-                [信息检索IR]01.倒排索引(Inverted Index)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-07-31
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>假设要查询文本中是否含有某个单词，第一个蹦入我们脑海中的想法一定就是把这个文本从头到尾通读一次，知道读到这个单词为止。<br>这就是最简单的一种遍历方式。虽然简单，但是在面对许多文本的时候，效率就会显得相当低下。</p>
-<p>假设现在有如下4个文本：</p>
-<p>_doc1: the day the night_<br>_ doc2: the day_<br>_ doc3: the night_<br>_ doc4: the midnight_</p>
-<p>需要查询究竟是哪篇文章含有单词”midnight”（query:midnight）</p>
-<p>I.</p>
-<p>这时如果按顺序遍历的话，共需要访问10次(依次读取比对the, day, the, night, the, day, the, night, the, midnight)才能得到查询的结果doc4。<br>那么除了最基本的按照顺序检索之外，是否还具有别的更有效率的方法呢？</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-07-31-ir_inverted-index/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -771,7 +766,7 @@ table.ReadXml(fileName2);
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -785,7 +780,7 @@ table.ReadXml(fileName2);
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -834,7 +829,7 @@ table.ReadXml(fileName2);
         <div class="copyright">
   
   &copy; &nbsp;  2012 - 
-  2017
+  2018
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
@@ -905,7 +900,24 @@ table.ReadXml(fileName2);
 
   
   
-  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

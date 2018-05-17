@@ -152,6 +152,78 @@
           
           
             
+              <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
+                Transform of Hive Streaming
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>我这大半年来大多数时候是在用Hadoop或者Hive对数据进行处理，而在处理hive数据时，有的功能用Hive很难实现或者不能够实现，这个时候就可以引入脚本来帮忙处理，以下整理出我在工作中总结出的一些东西。</p>
+<p>Streaming可以让我在Hive上直接运行python脚本，优点是开发快捷，缺点是效率偏低。</p>
+<p>要使用Streaming进行开发，需要对输出进行转换——使用TRANSFORM()，将默认的输出转换成字符串，该字符串具有如下特点：</p>
+<p>(1) 列之间的分隔符为\t;</p>
+<p>(2) 行之间的分隔符为\n;</p>
+<p>(3) 表中为空的数据将显示成为\N;</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
+<li>标准MapReduce</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
                 Hive相关知识
               </a>
@@ -632,83 +704,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-11-06-Perceptron/">
-                Perceptron(感知机)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-11-06
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>所谓的“感知机”这个名词显得有点名不副实，因为我实在没觉得它的机制和感知不感知有什么联系，容易误导不明真相的群众。</p>
-<p>其实不过就是二类分类的线性分类模型，一种将实例划分成为正负两类的判别模型。得到实例的输入之后，再输出值(只能是+1和-1这两个值)。</p>
-<p>感知机学习的终极目标就是通过训练样本最终找到一个能将正负类型隔开的一个超平面。</p>
-<h3 id="直观的几何理解："><a href="#直观的几何理解：" class="headerlink" title="直观的几何理解："></a>直观的几何理解：</h3><p><img src="\img\2012-11-06-Perceptron-01.jpg" alt="分类"></p>
-<h3 id="理论定义"><a href="#理论定义" class="headerlink" title="理论定义"></a>理论定义</h3><p>假设输入空间（特征空间）是 \(X \subset R^n\) ，输出空间是\(Y \in {+1, -1}\)。 输入\(x \in X\) 表示实例的特征向量，对应于输入空间（特征空间）的点；输出\(y \in Y\)表示实例的类别。 由输入空间到输出空间当然如下函数成为感知机。</p>
-<p>$$f(x) = sign(w \cdot x + b)$$</p>
-<p>其中，</p>
-<p>(1) w,b为感知机模型参数，sign()为符号函数</p>
-<p>(2) x - 空间中的一个点，它是一个n维向量：\( (x^{(1)}, x^{(2)}, …, x^{(n)}) \)</p>
-<p>(3) y - 对应于x的分类，取值{-1,1}，一般认为当x在超平面S上时取+1（与S法向量同方向）；反之则取-1</p>
-<p>(4) w - 权值(weight)或权值向量(weight vector)</p>
-<p>(5) b - 偏置(bias)</p>
-<p>(6) \(w \cdot x\) 表示 向量w 和 x的内积.</p>
-<p>(7) sign() - 符号函数，即</p>
-<p>$$sign(x) = \begin{equation}\begin{cases} 1, x \geq 0 \\<br>0, x &lt; 0 \end {cases} \end{equation}$$</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-11-06-Perceptron/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -747,7 +742,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -761,7 +756,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -810,7 +805,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2012 - 
-  2017
+  2018
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
@@ -881,24 +876,7 @@
 
   
   
-  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 </body>

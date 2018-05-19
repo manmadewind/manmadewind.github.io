@@ -152,6 +152,72 @@
           
           
             
+              <a class="post-title-link" href="/2015-07-13-arbitrage-bitcoin/">
+                [转]一个比特币套利系统，每天躺着收钱
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote class="blockquote-center"><br>这篇文章为我打开了一扇门，让我对<strong>“套利”</strong>这件事情有了更为深刻的认识，毕竟当年我也曾搬过比特币的砖，所以对这篇文章感觉格外亲切，但平凡的我就只限于做一个普通的搬砖工人，不思进取，一不小心就会被砖砸到脚；而聪明的作者却从中发现了不败的套利方法，着实让我大开眼界！<br><br>简而言之，作者运用比特币在多个市场之间价格类似于跷跷板的特点进行左右搬砖套利，并借助于融券功能保证了最终砖的价值不受市场价格的影响，纯粹套利而与砖的价值无关。<br></blockquote>
+
+
+<p>本文转载自<a href="http://daily.zhihu.com/story/4831821">知乎日报</a><br>作者：<a href="http://www.zhihu.com/people/id47">袁浩瀚（知乎）</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-07-13-arbitrage-bitcoin/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-07-02-Notice/">
                 博客搬家
               </a>
@@ -719,80 +785,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-03-25-hive-cmd/">
-                Hive的trick和坑
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-03-25
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="1-Hive直接插入数据"><a href="#1-Hive直接插入数据" class="headerlink" title="1.  Hive直接插入数据"></a>1.  Hive直接插入数据</h1><p>我们知道Hive在很多时候很好用，但是有时在做一些测试的时候，需要表里有一些数据，这个时候如果再导来到去或者再写源文件生成数据却是非常的麻烦，经我反复揣摩终于发现了一种直接往Hive表中插入数据的方法。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">INSERT INTO TABLE target_table</div><div class="line"></div><div class="line">SELECT STACK(</div><div class="line"></div><div class="line">    2,                 # 插入记录的总数</div><div class="line"></div><div class="line">    'John', 80,        # 记录1</div><div class="line"></div><div class="line">    'Bill', 61         # 记录2</div><div class="line"></div><div class="line">    ) </div><div class="line"></div><div class="line">FROM dual              # 任意一张已经存在的表（表中的记录条数&gt;=1即可）</div><div class="line"></div><div class="line">LIMIT 2;               # 插入记录的总数</div></pre></td></tr></table></figure>
-<h1 id="2-join有天坑"><a href="#2-join有天坑" class="headerlink" title="2. join有天坑"></a>2. join有天坑</h1><h2 id="Full-outer-join"><a href="#Full-outer-join" class="headerlink" title="Full outer join"></a>Full outer join</h2><p>Full outer join 在on中过滤分区有问题，解决方法是将分区过滤条件放到左表和右表子查询里面<br>比如：</p>
-<pre><code># 错误写法
-Select a.x,b.x from a full|left|right outer join b on (a.key=b.key and a.ds=d1 and b.ds=d1)
-
-
-# 正确写法
-Select t1.x ,t2.x from (select * from a where ds=d1) t1
-full outer join
- (select * from  b where ds=d1) t2 on t1.key=t2.key
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-03-25-hive-cmd/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -831,7 +823,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

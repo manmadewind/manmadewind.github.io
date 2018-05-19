@@ -152,6 +152,74 @@
           
           
             
+              <a class="post-title-link" href="/2012-11-13-knn/">
+                k-NN(k Nearest Neighbor)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-11-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="直观理解"><a href="#直观理解" class="headerlink" title="直观理解"></a>直观理解</h2><p>　　k-NN是一种基于“物以类聚人以群分”思路的分类方法。</p>
+<p>　　</p>
+<p>　　以下图为例，小明为刚加入这个班级不久的新同学，在挑选兴趣小组时稍微犯了点难，因为他好像对什么都不太感兴趣，但是经过一周和班上同学的接触，小明和同学们的亲疏程度已经有了自己的判断，在图中以距离的形式表现了出来，距离越近的关系越好。</p>
+<p>　　那么，在如何给小明划分群体的这个问题上，我们就可以使用k-NN来进行判断。我们取k = 6,即认为小明的群体划分是以和他关系最好的6个人来判断的，明显，图中和小明最亲近的6个人中，5个是活泼调皮类型的，1个是文静类型的，因此我们可以大致判断，小明有比较大的可能也是属于活泼调皮类型的。</p>
+<p><img src="\img\2012-11-13-knn-01.png" alt="小明"></p>
+<p>但是如果考虑k &gt; 10的情况，例如k = 11，那么我们可以发现，11个人中，5个活泼好动，另外6个文静，则按照k-NN的思想，我们认为小明是属于文静类型的人。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-11-13-knn/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-11-06-Perceptron/">
                 Perceptron(感知机)
               </a>
@@ -646,96 +714,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-10-09-project-clsfy-emi/">
-                [Project]单标签文本分类(基于EMI)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-10-09
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>这是上学期自然语言处理课程(宗成庆老师的课哟)的期末项目(<a href="https://docs.google.com/open?id=0B-oFtMtAOV_YeHhiWFIzdDBhM1E" target="_blank" rel="external">详细的实验报告可以点我!</a>)</p>
-<h2 id="1-实现思路"><a href="#1-实现思路" class="headerlink" title="1.实现思路"></a>1.实现思路</h2><p>在训练样本中,先用特征选择算法提取出文档的特征,再在初始特征集上求其子集,最后依靠所求得的特征值对新文档进行计算求其分类。</p>
-<h2 id="2-实现方法"><a href="#2-实现方法" class="headerlink" title="2.实现方法"></a>2.实现方法</h2><p>本实验采用<strong>EMI(Expect Mutual Information, 期望互信息)</strong>算法对训练语料进行特征选择,并使用它作为评判文档分类的依据,EMI 的形式化定义如下:</p>
-<p><strong>Excepted Mutual Information:</strong></p>
-<span>$$I(T, C) = 
-\sum_{e_t\subset{\{1,0\}}} 
-\sum_{e_c\subset{\{1,0\}}} 
-P(T = e_t, C = e_c) \log_{2} \frac{P(T = e_t, C = e_c)} 
-{P(T = e_t)P(C = e_c)}$$</span><!-- Has MathJax -->
-<p>其中T是一个二值随机变量，当文档包含词项t时，$e_t = 1$，否则$e_t = 0$;</p>
-<p>C亦是一个二值随机变量，当文档属于类别c是$e_c = 1$，否则$e_c = 0$;</p>
-<p>EMI在判断某个词项与文档是否相关方面有很好的表现,而传统的朴素贝叶斯方式在计算特征值方面却显得有些单薄,因为文档中可能会存在某些很少出现,但是归属性特别强的特征,比如有文档中有单词’Tibet’,这个单词虽然在文档集中不常出现,但如果一旦出现就必然是和属性CHINA类相关,而朴素贝叶斯却不会注意这种小众特征。 以EMI的方式来确认词项的特征值,它的好处是能够突出某个典型却不常出现词项的特征值。</p>
-<p>不过单纯使用EMI方法只能判断单词和类别之间的相关度,但是并不能判断是正相关还是负相关,比如我们的文档集中有2个文档</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">d1</span> = &#123;”Chinese”, China&#125;</div><div class="line"><span class="attr">d2</span> = &#123;”Japanese”, Japan&#125;</div></pre></td></tr></table></figure>
-<p>根据EMI算法中各项的对称性,会得出I(T = Chinese, C = China) = I (T = Chinese, C = Japan) = 1,</p>
-<p>而明显可以看出词项”Chinese”和类别Japan应该是负相关的,因此需要借助于传统的<strong>互信息(Mutual Information)</strong>来判断词项和类别的正负相关性。只留下正相关的特征,而负相关的特征丢弃。MI的形式定义如下:</p>
-<p><strong>Mutual Information:</strong></p>
-<p>$$I(t,c) = P(t,c)log_2 \frac{P(t,c)}{P(t)P(c)}$$</p>
-<p>求得初始特征集后,采用BIF(Best Individual Features)算法求出最优特征,这样整个训练过程就结束了。</p>
-<h2 id="3-过程纲要"><a href="#3-过程纲要" class="headerlink" title="3.过程纲要"></a>3.过程纲要</h2><h3 id="I-训练过程"><a href="#I-训练过程" class="headerlink" title="I.训练过程:"></a>I.训练过程:</h3><p>1.首先遍历所有训练样本,将所遇到的单词存入一个词典中,同时计算这个单词出现的文档频率(document frequency, df)</p>
-<p>2.根据EMI算法每个单词和每种类别的关联程度,如果关联程度大于之前设定的一个阈值,则再计算这个单词和这个属性是正相关还是负相关,最后只留下正相关的加入原始特征集中。</p>
-<p>3.用BIF求出几个最显著的特征作为对应分类的最终特征(即简单选取n个特征值最高的特征最为最终的特征，其他舍去)。</p>
-<h3 id="II-分类过程"><a href="#II-分类过程" class="headerlink" title="II.分类过程"></a>II.分类过程</h3><p>1.依次读入文章中的单词(重复的单词不加入计算,直接跳过),将出现的特征单词依次记下并累加。</p>
-<p>2.扫描完成后对几个分类中的特征值累加和进行比较,取最大的作为该文章的分类。</p>
-<h2 id="4-意外收获"><a href="#4-意外收获" class="headerlink" title="4.意外收获"></a>4.意外收获</h2><p>在做特征选择的过程中,我偶然发现可以将EMI方法用于自动挖掘停用词(Stop words),当单词的EMI值低于某个阈值的时候,便可以考虑将它看作停用词。</p>
-<h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><p>主要来自于:</p>
-<ol>
-<li><p>Christopher D. M Prabhakar Raghavan and Hinrich Schutze. Introduction to Information Retrieval. Cambridge University Press 2008.</p>
-</li>
-<li><p>Battiti, R.: Using Mutual Information for Selecting Features in Supervised Neural Net Learning. IEEE Trans. Neural Networds 5(1994) 537-550.</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -774,7 +752,7 @@ P(T = e_t, C = e_c) \log_{2} \frac{P(T = e_t, C = e_c)}
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

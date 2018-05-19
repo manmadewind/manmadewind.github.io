@@ -152,6 +152,80 @@
           
           
             
+              <a class="post-title-link" href="/2015-03-25-hive-cmd/">
+                Hive的trick和坑
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-03-25
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="1-Hive直接插入数据"><a href="#1-Hive直接插入数据" class="headerlink" title="1.  Hive直接插入数据"></a>1.  Hive直接插入数据</h1><p>我们知道Hive在很多时候很好用，但是有时在做一些测试的时候，需要表里有一些数据，这个时候如果再导来到去或者再写源文件生成数据却是非常的麻烦，经我反复揣摩终于发现了一种直接往Hive表中插入数据的方法。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">INSERT INTO TABLE target_table</div><div class="line"></div><div class="line">SELECT STACK(</div><div class="line"></div><div class="line">    2,                 # 插入记录的总数</div><div class="line"></div><div class="line">    'John', 80,        # 记录1</div><div class="line"></div><div class="line">    'Bill', 61         # 记录2</div><div class="line"></div><div class="line">    ) </div><div class="line"></div><div class="line">FROM dual              # 任意一张已经存在的表（表中的记录条数&gt;=1即可）</div><div class="line"></div><div class="line">LIMIT 2;               # 插入记录的总数</div></pre></td></tr></table></figure>
+<h1 id="2-join有天坑"><a href="#2-join有天坑" class="headerlink" title="2. join有天坑"></a>2. join有天坑</h1><h2 id="Full-outer-join"><a href="#Full-outer-join" class="headerlink" title="Full outer join"></a>Full outer join</h2><p>Full outer join 在on中过滤分区有问题，解决方法是将分区过滤条件放到左表和右表子查询里面<br>比如：</p>
+<pre><code># 错误写法
+Select a.x,b.x from a full|left|right outer join b on (a.key=b.key and a.ds=d1 and b.ds=d1)
+
+
+# 正确写法
+Select t1.x ,t2.x from (select * from a where ds=d1) t1
+full outer join
+ (select * from  b where ds=d1) t2 on t1.key=t2.key
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-03-25-hive-cmd/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
                 Transform of Hive Streaming
               </a>
@@ -636,74 +710,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-11-13-knn/">
-                k-NN(k Nearest Neighbor)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-11-13
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="直观理解"><a href="#直观理解" class="headerlink" title="直观理解"></a>直观理解</h2><p>　　k-NN是一种基于“物以类聚人以群分”思路的分类方法。</p>
-<p>　　</p>
-<p>　　以下图为例，小明为刚加入这个班级不久的新同学，在挑选兴趣小组时稍微犯了点难，因为他好像对什么都不太感兴趣，但是经过一周和班上同学的接触，小明和同学们的亲疏程度已经有了自己的判断，在图中以距离的形式表现了出来，距离越近的关系越好。</p>
-<p>　　那么，在如何给小明划分群体的这个问题上，我们就可以使用k-NN来进行判断。我们取k = 6,即认为小明的群体划分是以和他关系最好的6个人来判断的，明显，图中和小明最亲近的6个人中，5个是活泼调皮类型的，1个是文静类型的，因此我们可以大致判断，小明有比较大的可能也是属于活泼调皮类型的。</p>
-<p><img src="\img\2012-11-13-knn-01.png" alt="小明"></p>
-<p>但是如果考虑k &gt; 10的情况，例如k = 11，那么我们可以发现，11个人中，5个活泼好动，另外6个文静，则按照k-NN的思想，我们认为小明是属于文静类型的人。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-11-13-knn/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -742,7 +748,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

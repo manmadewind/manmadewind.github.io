@@ -152,6 +152,71 @@
           
           
             
+              <a class="post-title-link" href="/2015-04-10-svm-abs/">
+                SVM总结
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-04-10
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>话说当年知识掌握得还比较轻飘，在某厂面试时被要求徒手推导SVM也是一种难得的体验。</p>
+<p>转眼几年过去了，这里懒得再推SVM，就只放个综述作为备忘录。</p>
+<p>SVM也是一种基本分类器，与之前提到的感知机(Perceptron)颇为相似，不过需要注意，感知机找到的分类超平面可以有无限多个，只要是能对训练集数据进行正确分类即可，而SVM有着更为苛刻的要求，所求的分类超平面需要离最近的样本数据点距离最大（这些离最终分类平面最近的点被称为支持向量），这就意味着最终找到的分类超平面不仅能够划分训练数据，还需面对未知的数据具有较为良好的分类能力。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-04-10-svm-abs/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-03-25-hive-cmd/">
                 Hive的trick和坑
               </a>
@@ -641,75 +706,6 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2013-01-26-top-k-sort/">
-                [排序算法]关于Top-k排序(优先队列Priority Queue)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2013-01-26
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>在实际应用中，常有这样一种情况，对于一大堆杂乱无章的数据(大小为n)，我们需要的往往只是其中最小或者最大的前k位，而之后的数据对我们没有任何意义，普通的排序算法在这个时候就显得有点不合时宜了，特别是当k &lt;&lt; n时，简直是杀鸡用牛刀，还浪费了大量磨刀的时间。</p>
-<h2 id="1-Appetiser-first-先来点开胃菜"><a href="#1-Appetiser-first-先来点开胃菜" class="headerlink" title="1. Appetiser, first! 先来点开胃菜"></a>1. Appetiser, first! 先来点开胃菜</h2><p>实例：假设手头上有100万个数字，而现在只需要知道其中数值最大的100个数，那么应该怎么办？</p>
-<h3 id="Part-I-方法选择"><a href="#Part-I-方法选择" class="headerlink" title="Part I.方法选择"></a>Part I.方法选择</h3><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>使用常规排序算法对所有条目进行排序，接着再选取Top-100。</p>
-<p>这种方法之前已经说过，在这种情景下效率偏低，不太合适。</p>
-<p>在使用快排的情况下，时间复杂度为O(nlogn)) = O(100wlog100w)</p>
-<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>使用堆排序(Heap Sort)（或者更具体一点说应该是使用k-堆排序）[专业术语叫做：<strong>优先队列(Priority Queue)</strong>]</p>
-<p>这便是这篇文章所要具体介绍的方法。（不过方案二给出的方法并不是最好的解决方案）</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013-01-26-top-k-sort/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -748,7 +744,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

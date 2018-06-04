@@ -152,6 +152,74 @@
           
           
             
+              <a class="post-title-link" href="/2015-11-12-calendar_tools/">
+                我最近使用的任务、事件管理工具
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-11-12
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>总体是依附于Google Calendar + Google Task</p>
+<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><blockquote>
+<p>解决方案: Google Calendar + Google Task</p>
+</blockquote>
+<p>Google Calendar是一个挺好用的事件(Event)管理工具，它的闪光点在于可以将任务(Google Task)集成在一起，让我能够以月历的方式一目了然所有的事件和任务。而传统的任务管理中，只能以列表的方式来查看，让我觉得有一些些不太开心。</p>
+<p>可这里仍然有几个美中不足的地方——<br> (1) 无法在日历中直接添加Google Task，Task需要从Google Calendar网页中的侧边栏添加。<br> (2) 添加Task体验不好，而且Task的时间粒度只能具体到天，不能添加具体的开始、结束时间，因此不能出现在当天具体的时间线上，只会被放置在最顶端。<br> (3) Google Task不能设置具体的通知时间… 这简直有点不能忍了。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-11-12-calendar_tools/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-09-04-ad_click_spark/">
                 [转]搜狐基于Spark的新闻和广告推荐实战
               </a>
@@ -606,185 +674,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-04-28-hadoop-cmd/">
-                Hadoop中的常用命令
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-04-28
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>总结了一些我平时常用的Hadoop命令</p>
-<table>
-<thead>
-<tr>
-<th>主参数</th>
-<th>次参数</th>
-<th>作用</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fs</td>
-<td>-get</td>
-<td>复制文件到本地路径下</td>
-<td>hadoop fs -get /user/hadoop/file localfile</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-put</td>
-<td>像目标目录推送文件</td>
-<td>hadoop fs -put localfile /user/hadoop/hadoopfile</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-cp</td>
-<td>复制，参数-f,-p</td>
-<td>hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-mv</td>
-<td>移动，秒级完成</td>
-<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-count</td>
-<td>得到文件/目录等数目追加参数-q, -h有不同的意义</td>
-<td>hadoop fs -count -q hdfs://nn1.example.com/file1</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-du</td>
-<td>得到指定文件的大小</td>
-<td>hadoop fs -du /test/hadoop</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-ls</td>
-<td>显示文件</td>
-<td>hadoop fs -ls /user/hadoop/file1</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-lsr</td>
-<td>ls -R</td>
-<td>hadoop fs ls -R</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-rm</td>
-<td>删除文件</td>
-<td>hadoop fs -rm hdfs://nn.example.com/file /user/hadoop/emptydir</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-rmr</td>
-<td>删除文件夹（linux: rm -r）</td>
-<td>hadoop fs -rmr /usr/db/filedir/</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-tail</td>
-<td>输出文件的最后1千字节</td>
-<td>hadoop fs -tail pathname</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-test</td>
-<td>检查文件</td>
-<td>hadoop fs -test -e filename</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-touchz</td>
-<td>创建空文件</td>
-<td>hadoop fs -touchz pathname</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-appendToFile</td>
-<td>将一个或者多个本地文件追加到目的文件</td>
-<td>hadoop fs -appendToFile localfile /user/hadoop/hadoopfile</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-mkdir</td>
-<td>创建目录，-p创建多层目录</td>
-<td>hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>-mv</td>
-<td>移动文件</td>
-<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
-</tr>
-<tr>
-<td>job</td>
-<td>-set-priority</td>
-<td>设置作业优先级</td>
-<td>hadoop job -set-priority jobid-0000-0000 VERY_HIGH</td>
-</tr>
-<tr>
-<td>job</td>
-<td>-kill</td>
-<td>杀掉作业</td>
-<td>hadoop job -kill jobid-0000-0000</td>
-</tr>
-</tbody>
-</table>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -823,7 +712,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

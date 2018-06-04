@@ -152,6 +152,86 @@
           
           
             
+              <a class="post-title-link" href="/2012-07-20-python_switchandcase/">
+                [Python]switch,case和深浅拷贝
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-20
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="switch-amp-case"><a href="#switch-amp-case" class="headerlink" title="switch &amp; case"></a>switch &amp; case</h2><p>Python没有switch…case的语法，不过可以用Dictionary的特性来写出同样功能的代码，甚至还可以写出更猛的代码</p>
+<p>等价的Python代码：</p>
+<pre><code>def f1():
+    print &apos;f1&apos;
+
+def f2():
+    print &apos;f2&apos;
+
+switcher = 
+{
+  1: f1,
+  2: f2,
+}
+
+#调用时
+switcher[1]() # 将输出 f1
+switcher[2]() # 将输出 f2
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-20-python_switchandcase/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-07-20-python_dictionary-sort/">
                 [Python]列表排序 & 字典排序
               </a>
@@ -434,7 +514,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

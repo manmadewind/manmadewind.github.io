@@ -152,6 +152,185 @@
           
           
             
+              <a class="post-title-link" href="/2015-04-28-hadoop-cmd/">
+                Hadoop中的常用命令
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-04-28
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>总结了一些我平时常用的Hadoop命令</p>
+<table>
+<thead>
+<tr>
+<th>主参数</th>
+<th>次参数</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs</td>
+<td>-get</td>
+<td>复制文件到本地路径下</td>
+<td>hadoop fs -get /user/hadoop/file localfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-put</td>
+<td>像目标目录推送文件</td>
+<td>hadoop fs -put localfile /user/hadoop/hadoopfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-cp</td>
+<td>复制，参数-f,-p</td>
+<td>hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mv</td>
+<td>移动，秒级完成</td>
+<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-count</td>
+<td>得到文件/目录等数目追加参数-q, -h有不同的意义</td>
+<td>hadoop fs -count -q hdfs://nn1.example.com/file1</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-du</td>
+<td>得到指定文件的大小</td>
+<td>hadoop fs -du /test/hadoop</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-ls</td>
+<td>显示文件</td>
+<td>hadoop fs -ls /user/hadoop/file1</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-lsr</td>
+<td>ls -R</td>
+<td>hadoop fs ls -R</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-rm</td>
+<td>删除文件</td>
+<td>hadoop fs -rm hdfs://nn.example.com/file /user/hadoop/emptydir</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-rmr</td>
+<td>删除文件夹（linux: rm -r）</td>
+<td>hadoop fs -rmr /usr/db/filedir/</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-tail</td>
+<td>输出文件的最后1千字节</td>
+<td>hadoop fs -tail pathname</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-test</td>
+<td>检查文件</td>
+<td>hadoop fs -test -e filename</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-touchz</td>
+<td>创建空文件</td>
+<td>hadoop fs -touchz pathname</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-appendToFile</td>
+<td>将一个或者多个本地文件追加到目的文件</td>
+<td>hadoop fs -appendToFile localfile /user/hadoop/hadoopfile</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mkdir</td>
+<td>创建目录，-p创建多层目录</td>
+<td>hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2</td>
+</tr>
+<tr>
+<td>fs</td>
+<td>-mv</td>
+<td>移动文件</td>
+<td>hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2</td>
+</tr>
+<tr>
+<td>job</td>
+<td>-set-priority</td>
+<td>设置作业优先级</td>
+<td>hadoop job -set-priority jobid-0000-0000 VERY_HIGH</td>
+</tr>
+<tr>
+<td>job</td>
+<td>-kill</td>
+<td>杀掉作业</td>
+<td>hadoop job -kill jobid-0000-0000</td>
+</tr>
+</tbody>
+</table>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-04-10-svm-abs/">
                 SVM总结
               </a>
@@ -291,6 +470,73 @@ full outer join
           
           
             
+              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
+                Hive相关知识
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
+<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
+<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
+<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
                 Transform of Hive Streaming
               </a>
@@ -331,73 +577,6 @@ full outer join
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
-                Hive相关知识
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-02-15
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
-<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
-<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
-<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -639,73 +818,6 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2013-02-24-josephus-game/">
-                有关约瑟夫环问题(Josephus Game)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2013-02-24
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>n个小朋友手拉手围成一个圈，给定一个数字m。</p>
-<p>这时以第一个小朋友为起点开始报数，数到m的小朋友出列；</p>
-<p>m的下家为新的起点，开始重新开始报数；</p>
-<p>如此反复，一直到剩下最后一个小朋友。</p>
-<p>请问如何可以求得这最后的小朋友是谁？</p>
-<p>最容易想到的就是写个程序直接模拟游戏的全过程</p>
-<p>而<strong>动态规划</strong>的解法要更加的优雅简单</p>
-<p>定义方法：getSurvive(n, m) 返回(n,m)的最终生还者编号。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSurvive</span><span class="params">(n, m)</span>:</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    <span class="keyword">else</span>:</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (getSurvive(n - <span class="number">1</span>, m) + m) % n</div></pre></td></tr></table></figure>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -744,7 +856,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

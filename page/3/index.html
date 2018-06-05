@@ -152,6 +152,80 @@
           
           
             
+              <a class="post-title-link" href="/2015-05-13-adaboost-predict-stock/">
+                使用AdaBoost对股票的涨跌进行预测
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>近期股市大热，一些朋友们估计已经蠢蠢欲动想要做些什么了吧！我这里先抛砖引玉，丢出一个使用sklearn对个股次日涨跌进行预测的简单方法。</p>
+<h2 id="AdaBoost作为分类模型"><a href="#AdaBoost作为分类模型" class="headerlink" title="AdaBoost作为分类模型"></a>AdaBoost作为分类模型</h2><p>AdaBoost是我个人很喜欢的分类器，在参数合适的情况下它的预测效果往往能带带来不错的效果。</p>
+<p>而Adaboost的训练方法其实是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。</p>
+<p>该算法其实是一个简单的弱分类算法提升过程，这个过程通过不断的训练，可以提高对数据的分类能力。</p>
+<p>大致过程叙述如下：</p>
+<ol>
+<li>其算法本身是通过改变数据分布来实现的，它根据每次训练集之中每个样本的分类是否正确，以及上次的总体分类的准确率，来确定每个样本的权值。</li>
+</ol>
+<ol>
+<li>将修改过权值的新数据集送给下层分类器进行训练，最后将每次训练得到的分类器最后融合起来，作为最后的决策分类器。</li>
+</ol>
+<p>具体过程可参看<a href="https://zh.wikipedia.org/wiki/AdaBoost">维基百科</a>此处不再类属。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-05-13-adaboost-predict-stock/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-04-28-hadoop-cmd/">
                 Hadoop中的常用命令
               </a>
@@ -745,79 +819,6 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2013-03-24-reservoid-sampling/">
-                蓄水池抽样(reservoid sampling)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2013-03-24
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>缘起一道算法题目：有一个很大很大的输入流，大到没有存储器可以将其存储下来，而且只输入一次，如何从这个输入流中随机取得m个记录？（n未知）</p>
-<p>花了点时间，终于搞清楚了这个问题的正确解法以及证明方法，而我觉得<strong>目前为止网络上的许多证明都是错的！</strong> 所以我才想重新写写。</p>
-<p>让我们先从头开始——</p>
-<h2 id="1-开胃小菜，从m-1开始说起"><a href="#1-开胃小菜，从m-1开始说起" class="headerlink" title="1.开胃小菜，从m = 1开始说起"></a>1.开胃小菜，从m = 1开始说起</h2><p>有一个数据流持续输入，在不知道流具体大小的情况下，怎么样才可以保证从流中公平地（即保证每一个元素被选中的概率是等可能的）获取一个样本？</p>
-<h3 id="1-1-算法大意"><a href="#1-1-算法大意" class="headerlink" title="1.1 算法大意"></a>1.1 算法大意</h3><p>为方便起见，假设下标是从1开始的</p>
-<p>假设流数据为： stream[1], stream[2], stream[3], …, stream[n] （n在程序运行地过程中并不知道）</p>
-<p>单凭直观感觉，这题并不难解，</p>
-<p>首先在第1个元素到来的时候我们先暂定目标元素result = stream[1]；</p>
-<p>当第2个元素到来的时候，我们以1/2的概率来决定，result 是否要剔除原先的stream[1]换成stream[2]；</p>
-<p>当第3个元素到来的时候，我们以1/3的概率来决定result是否要被替换成stream[3]；</p>
-<p>同理，当第i个元素到来的时候，我们以1/i的概率来决定result是否要被替换成stream[i]；</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013-03-24-reservoid-sampling/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -856,7 +857,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

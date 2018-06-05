@@ -152,6 +152,72 @@
           
           
             
+              <a class="post-title-link" href="/2012-10-13-xiongqinglai/">
+                [读书笔记]我和爷爷熊庆来
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-10-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><img src="http://img3.douban.com/lpic/s4416867.jpg" alt=""></p>
+<h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><p>尝试背诵外语名著，应该是个学习外语的好方法。</p>
+<p>勿浪抛分寸光阴。</p>
+<p>要尊重年轻的人才，他们没有旧的框框，有很多新思想。</p>
+<p>不是背你讲的课，而是不断地问你问题，追根问到底。</p>
+<p>如果我是一个数学家，要来讨论一个问题，我要注意几个方面？</p>
+<p>熟读唐诗三百首，不会作诗也会吟。</p>
+<p>你没有好好看前言，又没有研究一下书的目录，你在学习时，当然会觉得乱。</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-10-10-project-ir-recommend/">
                 [Project]学术论文推荐系统
               </a>
@@ -672,70 +738,6 @@ P(T = e_t, C = e_c) \log_{2} \frac{P(T = e_t, C = e_c)}
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-08-29-python-note/">
-                Python的中文判断,文件以及时间
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-08-29
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>接近3个月没用python，很多东西又还回去了。 硬盘被格了，原来的很多东西也都没了。</p>
-<h2 id="中文判断："><a href="#中文判断：" class="headerlink" title="中文判断："></a>中文判断：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">uchar = unicode(char, <span class="string">'utf8'</span>) <span class="comment">#普通字符 -&amp;gt; utf8</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_chinese</span><span class="params">(uchar)</span>:</span></div><div class="line"></div><div class="line">        <span class="string">"""判断一个unicode是否是汉字"""</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> uchar &gt;= <span class="string">u'/u4e00'</span> <span class="keyword">and</span> uchar &lt;= <span class="string">u'/u9fa5'</span>:</div><div class="line"></div><div class="line">                 <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">         <span class="keyword">else</span>:</div><div class="line"></div><div class="line">                 <span class="keyword">return</span> <span class="keyword">False</span> <span class="function"><span class="keyword">def</span> <span class="title">is_number</span><span class="params">(uchar)</span>:</span></div><div class="line"></div><div class="line">         <span class="string">"""判断一个unicode是否是数字"""</span></div><div class="line"></div><div class="line">         <span class="keyword">if</span> uchar &gt;= <span class="string">u'/u0030'</span> <span class="keyword">and</span> uchar &lt;= <span class="string">u'/u0039'</span>:</div><div class="line"></div><div class="line">                 <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">         <span class="keyword">else</span>:</div><div class="line"></div><div class="line">                 <span class="keyword">return</span> <span class="keyword">False</span> <span class="function"><span class="keyword">def</span> <span class="title">is_alphabet</span><span class="params">(uchar)</span>:</span></div><div class="line"></div><div class="line">         <span class="string">"""判断一个unicode是否是英文字母"""</span></div><div class="line"></div><div class="line">         <span class="keyword">if</span> (uchar &gt;= <span class="string">u'/u0041'</span> <span class="keyword">and</span> uchar &lt;= <span class="string">u'/u005a'</span>) <span class="keyword">or</span> (uchar &gt;= <span class="string">u'/u0061'</span> <span class="keyword">and</span> uchar &lt;=<span class="string">u'/u007a'</span>):</div><div class="line"></div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">        <span class="keyword">else</span>:</div><div class="line"></div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_other</span><span class="params">(uchar)</span>:</span></div><div class="line"></div><div class="line">        <span class="string">"""判断是否非汉字，数字和英文字符"""</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (is_chinese(uchar) <span class="keyword">or</span> is_number(uchar) <span class="keyword">or</span> is_alphabet(uchar)):</div><div class="line"></div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">        <span class="keyword">else</span>:</div><div class="line"></div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-08-29-python-note/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -774,7 +776,7 @@ P(T = e_t, C = e_c) \log_{2} \frac{P(T = e_t, C = e_c)}
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

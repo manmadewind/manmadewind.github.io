@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="读书笔记,心得," />
+  <meta name="keywords" content="machine-learning,data-mining" />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> [读书笔记]自慢 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 修改anaconda/conda的路径 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body>
@@ -150,7 +150,7 @@
           
           
             
-              [读书笔记]自慢
+              修改anaconda/conda的路径
             
           
         </h1>
@@ -158,7 +158,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2012-10-26
+          发表于 2018-06-04
         </span>
 
         
@@ -175,60 +175,42 @@
       
 
       
-        <p><img src="http://img1.douban.com/mpic/s3318521.jpg" alt="《自慢》"></p>
-<p>我以为《自慢》是我近些年看过的最有用的一本杂书。</p>
-<h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><p>18.成功的人都是历经危机之后更加强大茁壮。</p>
-<p>面对危机，要有“第一时间勇敢面对”的态度</p>
-<p>克服逃避问题的个性，从“把最多的时间和精力分配给不喜欢做的事”开始！</p>
-<p>20.工作不当在野党，要成为主流拍。</p>
-<p>和则留，不和则散，没必要百般挑剔恶言相向。</p>
-<p>21.不能承认错误，是因为缺乏自信</p>
-<a id="more"></a>
-<p>22.好做不如做好</p>
-<p>24.少判断，多做计算</p>
-<p>28.正确、精准地完成工作，完成一件少一件，否则越做越多。</p>
-<p>33.对专业的绝对忠诚。专业的人，丝丝入扣，训练有素</p>
-<p>34.态度上自我期待一定要高，有心就能成就一流人才！</p>
-<p>40.拿别人的薪水，学自己的本事。</p>
-<p>41.只有特殊的工作才能让人印象深刻，适时地主动出牌！</p>
-<p>42.合理的要求是训练，不合理的要求是磨练</p>
-<p>43.对自我的要求要比组织的要求更高，使自己进步更快，且拥有更大的自主空间。</p>
-<p>48.面对做不完定理，需要一个健康的态度——“面对做不完”</p>
-<p>49.野性的斗志！</p>
-<p>61.朋友，从今天开始交起。</p>
-<p>62.最后一块钱，手放开。</p>
-<p>65.剧本之外的愤怒是非常危险的。</p>
-<p>66.外界疯狂时，更要保持冷静。</p>
-<p>拒绝诱惑的三部曲：</p>
-<p>(1)拒绝；(2)抵死不从；(3)逃离</p>
-<p>68.质量不能把握，还是先把握时间！</p>
-<p>70.勉强别人，理所当然！</p>
+        <p>假设旧路径为<code>/home/old/anaconda3/</code>，新路径为<code>/home/new/anaconda3/</code></p>
+<ol>
+<li><p>移动anaconda文件到新的路径下</p>
+<p><code>mv /home/old/anaconda3 /home/new/anaconda3</code></p>
+</li>
+<li><p>修改Anaconda的环境变量</p>
+<p>(1) 打开<code>.bashrc</code> (<code>vim ~/.bashrc</code>)</p>
+<p>(2) 修改新PATH为 <code>export PATH=&quot;/home/NEW/anaconda3/bin:$PATH&quot;</code></p>
+</li>
+<li><p>修改conda的路径<br>(1) 打开conda配置文件<code>vim /home/NEW/anaconda3/bin/conda</code></p>
+<p>(2) 修改文件头的python路径</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从原有的</div><div class="line"><span class="comment">#!/home/OLD/anaconda3/bin/python </span></div><div class="line">修改为</div><div class="line"><span class="comment">#!/home/OLD/anaconda3/bin/python</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更新一下conda配置</p>
+<p>如果不更新，conda命令虽然可以运行，但是会找不到.condarc文件，还是会有问题，更新方式为：<code>conda update conda</code></p>
+<p>​</p>
+</li>
+</ol>
 
       
     </div>
 
     <div class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/读书笔记/"> #读书笔记 </a>
-          
-            <a href="/tags/心得/"> #心得 </a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2012-11-06-Perceptron/">Perceptron(感知机)</a>
+              <a href="/2018-06-04-Lesson/">关于股票市场的一个大教训</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2012-10-19-kdd-step-by-step/">[转]看懂信息检索和网络数据挖掘领域论文的必备知识总结(练级步骤)</a>
+              <a href="/2018-05-19-Predict_Price/">2018年一个小小的预测</a>
             
           </div>
         </div>
@@ -371,7 +353,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘录"><span class="nav-number">1.</span> <span class="nav-text">摘录</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

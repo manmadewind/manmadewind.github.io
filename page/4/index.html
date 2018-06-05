@@ -152,6 +152,79 @@
           
           
             
+              <a class="post-title-link" href="/2013-03-24-reservoid-sampling/">
+                蓄水池抽样(reservoid sampling)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2013-03-24
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>缘起一道算法题目：有一个很大很大的输入流，大到没有存储器可以将其存储下来，而且只输入一次，如何从这个输入流中随机取得m个记录？（n未知）</p>
+<p>花了点时间，终于搞清楚了这个问题的正确解法以及证明方法，而我觉得<strong>目前为止网络上的许多证明都是错的！</strong> 所以我才想重新写写。</p>
+<p>让我们先从头开始——</p>
+<h2 id="1-开胃小菜，从m-1开始说起"><a href="#1-开胃小菜，从m-1开始说起" class="headerlink" title="1.开胃小菜，从m = 1开始说起"></a>1.开胃小菜，从m = 1开始说起</h2><p>有一个数据流持续输入，在不知道流具体大小的情况下，怎么样才可以保证从流中公平地（即保证每一个元素被选中的概率是等可能的）获取一个样本？</p>
+<h3 id="1-1-算法大意"><a href="#1-1-算法大意" class="headerlink" title="1.1 算法大意"></a>1.1 算法大意</h3><p>为方便起见，假设下标是从1开始的</p>
+<p>假设流数据为： stream[1], stream[2], stream[3], …, stream[n] （n在程序运行地过程中并不知道）</p>
+<p>单凭直观感觉，这题并不难解，</p>
+<p>首先在第1个元素到来的时候我们先暂定目标元素result = stream[1]；</p>
+<p>当第2个元素到来的时候，我们以1/2的概率来决定，result 是否要剔除原先的stream[1]换成stream[2]；</p>
+<p>当第3个元素到来的时候，我们以1/3的概率来决定result是否要被替换成stream[3]；</p>
+<p>同理，当第i个元素到来的时候，我们以1/i的概率来决定result是否要被替换成stream[i]；</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2013-03-24-reservoid-sampling/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2013-02-24-josephus-game/">
                 有关约瑟夫环问题(Josephus Game)
               </a>
@@ -635,72 +708,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-10-13-xiongqinglai/">
-                [读书笔记]我和爷爷熊庆来
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-10-13
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><img src="http://img3.douban.com/lpic/s4416867.jpg" alt=""></p>
-<h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><p>尝试背诵外语名著，应该是个学习外语的好方法。</p>
-<p>勿浪抛分寸光阴。</p>
-<p>要尊重年轻的人才，他们没有旧的框框，有很多新思想。</p>
-<p>不是背你讲的课，而是不断地问你问题，追根问到底。</p>
-<p>如果我是一个数学家，要来讨论一个问题，我要注意几个方面？</p>
-<p>熟读唐诗三百首，不会作诗也会吟。</p>
-<p>你没有好好看前言，又没有研究一下书的目录，你在学习时，当然会觉得乱。</p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -739,7 +746,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

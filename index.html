@@ -152,8 +152,8 @@
           
           
             
-              <a class="post-title-link" href="/2018-06-04-Lesson/">
-                关于股票市场的一个大教训
+              <a class="post-title-link" href="/2018-06-04-change_conda_path/">
+                修改anaconda/conda的路径
               </a>
             
           
@@ -180,8 +180,24 @@
 
       
         
-          <p>牛可以长期持有；</p>
-<p>熊最好不要长期持有，尤其是柒佰的，市场的悲观情绪可能很快就会释放完，接下来就会有更多的人抄底博反弹！</p>
+          <p>假设旧路径为<code>/home/OLD/anaconda3/</code>，新路径为<code>/home/NEW/anaconda3/</code></p>
+<ol>
+<li><p>移动anaconda文件到新的路径下</p>
+<p><code>mv /home/OLD/anaconda3 /home/NEW/anaconda3</code></p>
+</li>
+<li><p>修改Anaconda的环境变量</p>
+<p>(1) 打开<code>.bashrc</code> (<code>vim ~/.bashrc</code>)</p>
+<p>(2) 修改新PATH为 <code>export PATH=&quot;/home/NEW/anaconda3/bin:$PATH&quot;</code></p>
+</li>
+<li><p>修改conda的路径<br>(1) 打开conda配置文件<code>vim /home/NEW/anaconda3/bin/conda</code></p>
+<p>(2) 修改文件头的python路径</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从原有的</div><div class="line"><span class="comment">#!/home/OLD/anaconda3/bin/python </span></div><div class="line">修改为</div><div class="line"><span class="comment">#!/home/NEW/anaconda3/bin/python</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更新一下conda配置</p>
+<p>如果不更新，conda命令虽然可以运行，但是会找不到.condarc文件，还是会有问题，更新方式为：<code>conda update conda</code></p>
+<p>​</p>
+</li>
+</ol>
 
         
       
@@ -212,8 +228,8 @@
           
           
             
-              <a class="post-title-link" href="/2018-06-04-change_conda_path/">
-                修改anaconda/conda的路径
+              <a class="post-title-link" href="/2018-06-04-Lesson/">
+                关于股票市场的一个大教训
               </a>
             
           
@@ -240,24 +256,8 @@
 
       
         
-          <p>假设旧路径为<code>/home/old/anaconda3/</code>，新路径为<code>/home/new/anaconda3/</code></p>
-<ol>
-<li><p>移动anaconda文件到新的路径下</p>
-<p><code>mv /home/old/anaconda3 /home/new/anaconda3</code></p>
-</li>
-<li><p>修改Anaconda的环境变量</p>
-<p>(1) 打开<code>.bashrc</code> (<code>vim ~/.bashrc</code>)</p>
-<p>(2) 修改新PATH为 <code>export PATH=&quot;/home/NEW/anaconda3/bin:$PATH&quot;</code></p>
-</li>
-<li><p>修改conda的路径<br>(1) 打开conda配置文件<code>vim /home/NEW/anaconda3/bin/conda</code></p>
-<p>(2) 修改文件头的python路径</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从原有的</div><div class="line"><span class="comment">#!/home/OLD/anaconda3/bin/python </span></div><div class="line">修改为</div><div class="line"><span class="comment">#!/home/OLD/anaconda3/bin/python</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>更新一下conda配置</p>
-<p>如果不更新，conda命令虽然可以运行，但是会找不到.condarc文件，还是会有问题，更新方式为：<code>conda update conda</code></p>
-<p>​</p>
-</li>
-</ol>
+          <p>牛可以长期持有；</p>
+<p>熊最好不要长期持有，尤其是柒佰的，市场的悲观情绪可能很快就会释放完，接下来就会有更多的人抄底博反弹！</p>
 
         
       

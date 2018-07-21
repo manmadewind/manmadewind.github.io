@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,svm,总结," />
+  <meta name="keywords" content="python,aes," />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-  <title> SVM总结 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Python AES加密 // 集百折 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body>
@@ -150,7 +150,7 @@
           
           
             
-              SVM总结
+              Python AES加密
             
           
         </h1>
@@ -158,7 +158,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-04-10
+          发表于 2018-07-21
         </span>
 
         
@@ -175,18 +175,8 @@
       
 
       
-        <p>话说当年知识掌握得还比较轻飘，在某厂面试时被要求徒手推导SVM也是一种难得的体验。</p>
-<p>转眼几年过去了，这里懒得再推SVM，就只放个综述作为备忘录。</p>
-<p>SVM也是一种基本分类器，与之前提到的感知机(Perceptron)颇为相似，不过需要注意，感知机找到的分类超平面可以有无限多个，只要是能对训练集数据进行正确分类即可，而SVM有着更为苛刻的要求，所求的分类超平面需要离最近的样本数据点距离最大（这些离最终分类平面最近的点被称为支持向量），这就意味着最终找到的分类超平面不仅能够划分训练数据，还需面对未知的数据具有较为良好的分类能力。</p>
-<a id="more"></a>
-<p><img src="\img\2015-04-10-svm-abs-01.jpg" alt="示意图(来源网络)"></p>
-<p>最后需要解的最优问题：</p>
-<p>(1)线性情况:</p>
-<p>$$min_\alpha \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} (y_i y_j) (x_i \cdot x_j) - \sum_{i=1}^{N} \alpha_i \\<br>s.t. \sum_{i=1}^{N} \alpha_{i}y_{i}=0  \\<br>0&lt;=\alpha_i&lt;=C$$</p>
-<p>(2)非线性情况，使用核函数：</p>
-<p>$$min_\alpha \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} (y_i y_j) K(x_i \cdot x_j) - \sum_{i=1}^{N} \alpha_i  \\<br>s.t. \sum_{i=1}^{N} \alpha_{i}y_{i}=0  \\<br>0&lt;=\alpha_i&lt;=c$$</p>
-<p>我的笔记整理如下：</p>
-<p><img src="\img\2015-04-10-svm-abs-02.jpg" alt="我的笔记"></p>
+        <p>支持中文加密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">import</span> hashlib</div><div class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AESCipher</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key)</span>:</span> </div><div class="line">        self.bs = <span class="number">32</span></div><div class="line">        self.key = hashlib.sha256(key.encode()).digest()</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(self, raw_msg)</span>:</span>        </div><div class="line">        key = self.key</div><div class="line">        iv = Random.new().read(AES.block_size)</div><div class="line">        msg = self._pad(raw_msg)</div><div class="line">        cipher = AES.new(key, AES.MODE_CBC, iv)</div><div class="line">        <span class="keyword">return</span> base64.b64encode(iv + cipher.encrypt(msg))</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(self, encryptedData)</span>:</span></div><div class="line">        key = self.key</div><div class="line">        encryptedData = base64.b64decode(encryptedData)</div><div class="line">        iv = encryptedData[:AES.block_size]</div><div class="line">        cipher = AES.new(key, AES.MODE_CBC, iv)</div><div class="line">        <span class="keyword">return</span> self._unpad(cipher.decrypt(encryptedData[AES.block_size:])).decode(<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_unpad</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="keyword">return</span> s[:-ord(s[len(s)<span class="number">-1</span>:])]</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_pad</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="comment"># new for chn 中文主要在原始串编码成utf8格式！</span></div><div class="line">        BS = self.bs</div><div class="line">        s = s.encode(<span class="string">"utf-8"</span>)</div><div class="line">        <span class="keyword">return</span> s + (BS - len(s) % BS) * chr(BS - len(s) % BS).encode(<span class="string">"utf-8"</span>)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -195,11 +185,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/"> #机器学习 </a>
-          
-            <a href="/tags/svm/"> #svm </a>
-          
-            <a href="/tags/总结/"> #总结 </a>
+            <a href="/tags/python-aes/"> #python,aes </a>
           
         </div>
       
@@ -208,13 +194,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015-04-28-hadoop-cmd/">Hadoop中的常用命令</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015-03-25-hive-cmd/">Hive的trick和坑</a>
+              <a href="/2018-06-04-Lesson/">关于股票市场的一个大教训</a>
             
           </div>
         </div>

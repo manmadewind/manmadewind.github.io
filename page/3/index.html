@@ -152,6 +152,69 @@
           
           
             
+              <a class="post-title-link" href="/2015-05-21-scrapy-for-cctv/">
+                Python爬虫抓取新闻联播内容
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-21
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>近日澎湃新闻刊登了一则新闻，内容是有招商证券分析团队通过分析新闻联播的关键字判断股市涨跌，在整个5月中准确率高到爆棚，于是我就先写了一个爬虫打算有空时用到，现在先把代码送给你们吧——一个用Python Scrapy写的一个新闻联播文字版的爬虫：）</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-05-21-scrapy-for-cctv/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-05-13-adaboost-predict-stock/">
                 使用AdaBoost对股票的涨跌进行预测
               </a>
@@ -544,73 +607,6 @@ full outer join
           
           
             
-              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
-                Hive相关知识
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-02-15
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
-<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
-<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
-<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
               <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
                 Transform of Hive Streaming
               </a>
@@ -651,6 +647,73 @@ full outer join
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
+                Hive相关知识
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
+<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
+<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
+<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -735,90 +798,6 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2013-04-12-tsu-thinker/">
-                [转]清华生的多年奋斗领悟
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2013-04-12
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>原文链接不详<br>转载自：<a href="http://hi.baidu.com/1qqqqcom/item/7715ecd8bc40950820e2501b">http://hi.baidu.com/1qqqqcom/item/7715ecd8bc40950820e2501b</a></p>
-<h2 id="我的摘录"><a href="#我的摘录" class="headerlink" title="我的摘录"></a>我的摘录</h2><blockquote>
-<ol>
-<li><p>成功的人都有的共同特点——勤奋且坚韧不拔，目的性强善于学习，从不抱怨规则的不公平而是善于从不公平的规则中找到有利于自己的漏洞。</p>
-</li>
-<li><p>再烂的东西都有它的优点。 你今天学一点，明天学一点才会有所提高。否则除了骂社会，你什么都不会，一辈子白活。看别人要看优点，看自己要看到缺点。</p>
-</li>
-<li><p>凡事不要蛮干，要利用其他人的能力和资源。</p>
-</li>
-<li><p>平日，看到别人的成就，我一定会感慨：“为什么他的机会这么好?为什么我就赶不上，如果我生于他那个时代，我将怎样怎样。但我没有，所以我什么也做不了。”长此以往，我就看见一个个机会从我身边溜走，然后再一次次地发出这样的感慨。那么，我会永远在蹉跎叹息中度过，碌碌无为。</p>
-<p>终于我发现，这种感慨不过是出于嫉妒和懦弱的感情，为自己的懒惰找一个冠冕堂皇的借口。如果我当年不是每天回去打魔兽，不是每天上班先要打开电脑泡会儿论坛，而是把这些时间在自我提高，那我就能抓住那次房价大涨的扩张期，做到更高的职位，拿到更好地薪水。于是，机会溜走了。</p>
-<p>人生路上总有好多的岔口，当时选哪一条路往往很偶然。既然选择了一条的时候，另一条就关上了大门，那我们何必停下来，去感慨如果当初选了另一条会怎样怎样，自增烦恼。还不如勇往直前往前闯。<strong>临渊慕鱼，不如退而结网</strong>。</p>
-</li>
-<li><p>老祖宗讲过这么两句话，我觉得很深：一句叫静坐常思己过，闲谈莫论人非。还有一句叫露巧不如藏拙。</p>
-</li>
-<li><p>人就是这样，不是说成绩有多么重要，但是<strong>优秀是一种习惯</strong>，懒惰是一种惯性。人和人的差别又是就是因为每天积累差了一点点，终于有天你发现，原来我和他差了这么多。</p>
-<p> 如果离成功只有一步之遥，那谁都会咬牙坚持下来;如果忽然发现距离很远，那谁都会放弃。而<strong>关键的一咬牙，上了一个层次，有人就会春风得意，越活越成功</strong>;有人没上去，永远在苦逼中挣扎求生存。然后想，原来在当时，我们俩的距离才那么近。</p>
-</li>
-<li><p>大学的意义在于他给你打开了一片天，让你看的更远，让你知道原来在这个山头之外还有一个更高的山头。并不意味着你已经达到了那个山头，但你有了往上爬的方向，同时他给你聚集了一帮志同道合，以后可以互相扶持的社会单元。所以完全不必短视和急功近利，人生那么长，炫耀是做给别人看的，本事是自己，好像跑马拉松，一时谁跑得快慢不重要，关键是谁跑到了最后。</p>
-</li>
-</ol>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013-04-12-tsu-thinker/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -857,7 +836,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -871,7 +850,7 @@ full outer join
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -152,6 +152,72 @@
           
           
             
+              <a class="post-title-link" href="/2012-10-06-invisible-man/">
+                浅析十二/十三大汉图
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-10-06
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>今天逛了人人，被微软亚洲研究院人人主页上分享的一张Gif戳中了G点，此图如下：</p>
+<p><img src="\img\2012-10-06-invisible-man-01.gif" alt=""></p>
+<p>怎么一会12个人一会又是13个人嘛！有点意思</p>
+<p>之前我愣是看了半天没找出破绽，于是截了图片仔细研究了一下，终于发现其中的奥妙。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-10-06-invisible-man/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-09-07-top-kdd-res/">
                 [转]数据挖掘领域顶级会议期刊及其分析
               </a>
@@ -667,102 +733,11 @@ table.ReadXml(fileName2);
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-07-25-base_virtual-abstract/">
-                [基础知识]Virtual & Abstract
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-07-25
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Virtual</p>
-<p>虚函数是多态的前提和保证</p>
-<p>被标注为virtual的函数可以被继承类重写(override)，<strong>并且可以在运行时动态调用相应的方法</strong>（多态）。</p>
-<p>没有标注为virtual的非虚方法，在继承类中虽然不能通过override重写方法，但是也<strong>可以</strong>声明一个<strong>同名方法</strong>的，不过不具备多态的性质！</p>
-<pre><code>public class SuperClass
-{
-    public void Display()//not virtual
-    {
-        Console.WriteLine(&quot;I&apos;m super&quot;);
-    }
-
-    public virtual void Vdisplay()
-    {
-        Console.WriteLine(&quot;I&apos;m superVVV!!!&quot;);
-    }
-}
-
-public class LowerClass : SuperClass
-{
-    public void Display()//new public void Display();和父类中的方法同名，却不具备多态的性质
-    {
-        Console.WriteLine(&quot;i&apos;m lower&quot;);
-    }
-    public override void Vdisplay()//重写了父类中的方法
-    {
-        Console.WriteLine(&quot;I&apos;m lowerVVV&quot;);
-    }
-}
-</code></pre><p>Abstract</p>
-<p>abstract抽象方法则更像是一个接口(Interface)方法</p>
-<p>被标注为abstract的方法不能有具体的实现！</p>
-<p>而且如果有方法被标注为abstract, 则这个类需要被标注为abstract</p>
-<p>详情<br>具体关于virtual 和 abstract的区别可以参看：<a href="http://www.cnblogs.com/MayGarden/archive/2010/04/04/1704279.html" target="_blank" rel="external">http://www.cnblogs.com/MayGarden/archive/2010/04/04/1704279.html</a></p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">&raquo;</a>
   </div>
 
 
@@ -796,7 +771,7 @@ public class LowerClass : SuperClass
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

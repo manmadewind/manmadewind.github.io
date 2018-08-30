@@ -152,6 +152,73 @@
           
           
             
+              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
+                Hive相关知识
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-02-15
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
+<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
+<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
+<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-01-14-hadoop-mr-template/">
                 我的Hadoop MapReduce模板
               </a>
@@ -642,81 +709,11 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-10-26-slowdown/">
-                [读书笔记]自慢
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-10-26
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><img src="http://img1.douban.com/mpic/s3318521.jpg" alt="《自慢》"></p>
-<p>我以为《自慢》是我近些年看过的最有用的一本杂书。</p>
-<h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><p>18.成功的人都是历经危机之后更加强大茁壮。</p>
-<p>面对危机，要有“第一时间勇敢面对”的态度</p>
-<p>克服逃避问题的个性，从“把最多的时间和精力分配给不喜欢做的事”开始！</p>
-<p>20.工作不当在野党，要成为主流拍。</p>
-<p>和则留，不和则散，没必要百般挑剔恶言相向。</p>
-<p>21.不能承认错误，是因为缺乏自信</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-10-26-slowdown/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">&raquo;</a>
   </div>
 
 
@@ -750,7 +747,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

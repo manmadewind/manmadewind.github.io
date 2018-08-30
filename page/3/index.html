@@ -152,6 +152,77 @@
           
           
             
+              <a class="post-title-link" href="/2015-06-28-logistic-regression/">
+                关于Logistics Regression
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-28
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="1-从模型开始"><a href="#1-从模型开始" class="headerlink" title="1. 从模型开始"></a>1. 从模型开始</h2><p>Logistic Regression(常被翻译做“逻辑回归”) 一种分类模型，由于算法的简单和高效，在实际中应用非常广泛，尤其是它具有出色地将众多变量糅杂在一起并最终输出一个可以当做概率的值(大熔炉即视感)，因此颇为常用。</p>
+<h3 id="1-1-先从S形函数开始-Sigmoid-Function"><a href="#1-1-先从S形函数开始-Sigmoid-Function" class="headerlink" title="1.1 先从S形函数开始(Sigmoid Function)"></a>1.1 先从S形函数开始(Sigmoid Function)</h3><p>\( f(t) = \frac{e^t}{1+e^t} = \frac{1}{1+e^{-t}} \)</p>
+<p>该函数的神奇之处在于，可以将原本线性无拘无束的t值困在[0,1]范围内，并变换出一条柔美的S型曲线(Sigmoid Curve)。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="Sigmoid Curve"></p>
+<p>其实该函数还有另外一个名字——<code>Logistic Function</code>.</p>
+<h3 id="1-2-Logistic-Regression-Model"><a href="#1-2-Logistic-Regression-Model" class="headerlink" title="1.2 Logistic Regression Model"></a>1.2 Logistic Regression Model</h3><p>借助Logistic Function, 这里定义Logistic回归模型。</p>
+<p>$$P(Y=1|X) = \frac{exp(wx+b)}{1+exp(wx+b)} $$<br>$$P(Y=0|X) = \frac{1}{1+exp(wx+b)}$$</p>
+<p>其中， \( x \in R^n \)是输入， \( Y \in \) {0,1}是输出，\( w,b \)为参数(w-权值, b-偏置)</p>
+<p>从上文的sigmoid function我们就可以观察到，Logistic回归模型可以将线性函数\( (wx+b) \)转换成概率P(Y=1|X)</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-06-28-logistic-regression/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-06-02-how-to-kill-cockroach/">
                 [日常生活]如何有效杀灭蟑螂
               </a>
@@ -731,78 +802,11 @@ full outer join
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-02-15-hive-knowledge/">
-                Hive相关知识
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-02-15
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="1-手工添加分区"><a href="#1-手工添加分区" class="headerlink" title="1. 手工添加分区"></a>1. 手工添加分区</h2><p>(1) hadoop fs 拷入文件</p>
-<p>(2) 还需要在hive中 add partition，分区才可以被hive承认；否则，找不到对应分区。</p>
-<h2 id="2-复制表结构"><a href="#2-复制表结构" class="headerlink" title="2. 复制表结构"></a>2. 复制表结构</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE <span class="keyword">TABLE</span> target_table  <span class="comment">LIKE source_table</span></div></pre></td></tr></table></figure>
-<h2 id="3-给Hive表加锁，防删除或防查询"><a href="#3-给Hive表加锁，防删除或防查询" class="headerlink" title="3. 给Hive表加锁，防删除或防查询"></a>3. 给Hive表加锁，防删除或防查询</h2><pre><code>ALTER TABLE tableName ENABLE/DISABLE NO_DROP/OFFLINE
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-02-15-hive-knowledge/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
   </div>
 
 
@@ -836,7 +840,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -970,7 +974,24 @@ full outer join
 
   
   
-  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

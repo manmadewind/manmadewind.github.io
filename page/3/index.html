@@ -152,6 +152,135 @@
           
           
             
+              <a class="post-title-link" href="/2015-07-13-arbitrage-bitcoin/">
+                [转]一个比特币套利系统，每天躺着收钱
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-13
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote class="blockquote-center"><br>这篇文章为我打开了一扇门，让我对<strong>“套利”</strong>这件事情有了更为深刻的认识，毕竟当年我也曾搬过比特币的砖，所以对这篇文章感觉格外亲切，但平凡的我就只限于做一个普通的搬砖工人，不思进取，一不小心就会被砖砸到脚；而聪明的作者却从中发现了不败的套利方法，着实让我大开眼界！<br><br>简而言之，作者运用比特币在多个市场之间价格类似于跷跷板的特点进行左右搬砖套利，并借助于融券功能保证了最终砖的价值不受市场价格的影响，纯粹套利而与砖的价值无关。<br></blockquote>
+
+
+<p>本文转载自<a href="http://daily.zhihu.com/story/4831821">知乎日报</a><br>作者：<a href="http://www.zhihu.com/people/id47">袁浩瀚（知乎）</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015-07-13-arbitrage-bitcoin/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015-07-02-Notice/">
+                博客搬家
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-02
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>2015-07-02, 原来的主机商越来越不靠谱，于是终于打算放弃了接近4年的地盘，打算将博客迁移出来，目前迁移工作长在进行中…</p>
+<p>2015-07-12, 搬家工作已经完成，放弃了之前租用的虚拟主机，在正式切换域名解析的时候突然有点不舍。</p>
+<p>现在将博客托管在Github上，使用Hexo作为引擎。</p>
+<p>希望今后有空时也能记得来积累一些东西哟~</p>
+<p><img src="\img\2013-08-20-mirihi.jpg" alt=""></p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015-06-28-logistic-regression/">
                 关于Logistics Regression
               </a>
@@ -656,152 +785,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-03-25-hive-cmd/">
-                Hive的trick和坑
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-03-25
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="1-Hive直接插入数据"><a href="#1-Hive直接插入数据" class="headerlink" title="1.  Hive直接插入数据"></a>1.  Hive直接插入数据</h1><p>我们知道Hive在很多时候很好用，但是有时在做一些测试的时候，需要表里有一些数据，这个时候如果再导来到去或者再写源文件生成数据却是非常的麻烦，经我反复揣摩终于发现了一种直接往Hive表中插入数据的方法。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">INSERT INTO TABLE target_table</div><div class="line"></div><div class="line">SELECT STACK(</div><div class="line"></div><div class="line">    2,                 # 插入记录的总数</div><div class="line"></div><div class="line">    'John', 80,        # 记录1</div><div class="line"></div><div class="line">    'Bill', 61         # 记录2</div><div class="line"></div><div class="line">    ) </div><div class="line"></div><div class="line">FROM dual              # 任意一张已经存在的表（表中的记录条数&gt;=1即可）</div><div class="line"></div><div class="line">LIMIT 2;               # 插入记录的总数</div></pre></td></tr></table></figure>
-<h1 id="2-join有天坑"><a href="#2-join有天坑" class="headerlink" title="2. join有天坑"></a>2. join有天坑</h1><h2 id="Full-outer-join"><a href="#Full-outer-join" class="headerlink" title="Full outer join"></a>Full outer join</h2><p>Full outer join 在on中过滤分区有问题，解决方法是将分区过滤条件放到左表和右表子查询里面<br>比如：</p>
-<pre><code># 错误写法
-Select a.x,b.x from a full|left|right outer join b on (a.key=b.key and a.ds=d1 and b.ds=d1)
-
-
-# 正确写法
-Select t1.x ,t2.x from (select * from a where ds=d1) t1
-full outer join
- (select * from  b where ds=d1) t2 on t1.key=t2.key
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-03-25-hive-cmd/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015-02-15-transform-of-hive-streaming/">
-                Transform of Hive Streaming
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-02-15
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>我这大半年来大多数时候是在用Hadoop或者Hive对数据进行处理，而在处理hive数据时，有的功能用Hive很难实现或者不能够实现，这个时候就可以引入脚本来帮忙处理，以下整理出我在工作中总结出的一些东西。</p>
-<p>Streaming可以让我在Hive上直接运行python脚本，优点是开发快捷，缺点是效率偏低。</p>
-<p>要使用Streaming进行开发，需要对输出进行转换——使用TRANSFORM()，将默认的输出转换成字符串，该字符串具有如下特点：</p>
-<p>(1) 列之间的分隔符为\t;</p>
-<p>(2) 行之间的分隔符为\n;</p>
-<p>(3) 表中为空的数据将显示成为\N;</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
-<li>标准MapReduce</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FROM (</div><div class="line"></div><div class="line">    FROM src</div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> TRANSFORM(src.c1, src.c1) <span class="keyword">USING</span> ‘map_script’</div><div class="line"></div><div class="line">    <span class="keyword">AS</span> cc1, cc2</div><div class="line"></div><div class="line">    CLUSTER <span class="keyword">BY</span> cc1</div><div class="line"></div><div class="line">) map_output </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> pv_users_reduced</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TRANSFORM(map_output.cc1, map_output.cc2) </div><div class="line"></div><div class="line"><span class="keyword">USING</span> ‘reduce_script’ <span class="keyword">AS</span> c_reduced1, c_reduced2;</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015-02-15-transform-of-hive-streaming/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -840,7 +823,7 @@ full outer join
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -854,7 +837,7 @@ full outer join
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -903,7 +886,7 @@ full outer join
         <div class="copyright">
   
   &copy; &nbsp;  2012 - 
-  2018
+  2020
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

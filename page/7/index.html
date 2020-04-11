@@ -152,6 +152,148 @@
           
           
             
+              <a class="post-title-link" href="/2012-08-01-csharp_2012-8/">
+                [实践笔记][C#]的笔记搜集养成
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-08-01
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="DataTable-amp-XML"><a href="#DataTable-amp-XML" class="headerlink" title="DataTable &amp; XML"></a>DataTable &amp; XML</h2><p>DataTable/DataSet和XML文件之间的互操作<br>有一个DataTable(table),需要写成XML文件：</p>
+<pre><code>table.WriteXmlSchema(fileName1);
+table.ReadXml(fileName2);
+</code></pre><p>读取时：</p>
+<pre><code>table.ReadXmlSchema(fileName1);
+table.ReadXml(fileName2);
+</code></pre><h2 id="byte-amp-string"><a href="#byte-amp-string" class="headerlink" title="byte[] &amp; string"></a>byte[] &amp; string</h2><p>byte[] string之间的一种更简单的转换方式,不用像传统的方式一样还要动用到字符编码。</p>
+<p>1.byte[] -&gt; string</p>
+<pre><code>Convert.ToBase64String(byte[] ...);
+</code></pre><p>2.string -&gt; byte[]</p>
+<pre><code>Convert.FromBase64String(string ...);
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-08-01-csharp_2012-8/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2012-07-31-ir_inverted-index/">
+                [信息检索IR]01.倒排索引(Inverted Index)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2012-07-31
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>假设要查询文本中是否含有某个单词，第一个蹦入我们脑海中的想法一定就是把这个文本从头到尾通读一次，知道读到这个单词为止。<br>这就是最简单的一种遍历方式。虽然简单，但是在面对许多文本的时候，效率就会显得相当低下。</p>
+<p>假设现在有如下4个文本：</p>
+<p>_doc1: the day the night_<br>_ doc2: the day_<br>_ doc3: the night_<br>_ doc4: the midnight_</p>
+<p>需要查询究竟是哪篇文章含有单词”midnight”（query:midnight）</p>
+<p>I.</p>
+<p>这时如果按顺序遍历的话，共需要访问10次(依次读取比对the, day, the, night, the, day, the, night, the, midnight)才能得到查询的结果doc4。<br>那么除了最基本的按照顺序检索之外，是否还具有别的更有效率的方法呢？</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2012-07-31-ir_inverted-index/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2012-07-25-base_virtual-abstract/">
                 [基础知识]Virtual & Abstract
               </a>
@@ -578,138 +720,6 @@ switcher[2]() # 将输出 f2
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-07-20-dp-strategy/">
-                [读书笔记]策略模式
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-07-20
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>_《HeadFirst设计模式》读书笔记系列_</p>
-<h2 id="看起来美好的面向对象"><a href="#看起来美好的面向对象" class="headerlink" title="看起来美好的面向对象"></a>看起来美好的面向对象</h2><p>学过面向对象的都知道继承可以重用父类中的一些方法，从而减少很多劳动量：</p>
-<p>现有场景如下：</p>
-<blockquote>
-<p>玩具工厂生产各种鸭子，有优雅鸭子(ElegantDuck)，爵士鸭子(DukeDuck)，霸王鸭子(KingDuck)，均继承自超类鸭子(Duck)，他们都是可以飞行的，并且在飞行时执行统一的方法 Fly() —— 喊叫”I’m flying.” 于是优雅、爵士和霸王顺理成章地继承了超类的飞行方法。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-07-20-dp-strategy/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2012-07-17-dp-singleton/">
-                单件模式(Singleton Pattern)
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2012-07-17
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>这是设计模式中最简单的一种模式</p>
-<p>有的时候，你可能会希望有这样一个类，它只能允许最多有一个实例存在于这个世界上，这个实例，是独一无二的存在。</p>
-<p>这个时候，单件模式(singleton pattern)便应运而生</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2012-07-17-dp-singleton/#more">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -748,7 +758,7 @@ switcher[2]() # 将输出 f2
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -762,7 +772,7 @@ switcher[2]() # 将输出 f2
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -811,7 +821,7 @@ switcher[2]() # 将输出 f2
         <div class="copyright">
   
   &copy; &nbsp;  2012 - 
-  2018
+  2020
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
